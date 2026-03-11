@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cmd76yikq8war" path="res://icon.svg" id="1_0fbet"]
 [ext_resource type="Script" uid="uid://d2ghwx6w6uef8" path="res://dialog_control.gd" id="1_kbped"]
+[ext_resource type="Texture2D" uid="uid://dyoghiy12jv77" path="res://Sprites/Backgrounds/spr_background.PNG" id="2_6a6wx"]
 [ext_resource type="Theme" uid="uid://bmwrgfavtwtl2" path="res://main_theme.tres" id="2_62e2m"]
 [ext_resource type="Script" uid="uid://m6207tfq7dfn" path="res://dialog.gd" id="2_qtu10"]
 [ext_resource type="JSON" path="res://story.json" id="3_ee4bf"]
@@ -43,6 +44,16 @@ grow_vertical = 2
 size_flags_stretch_ratio = 0.0
 script = ExtResource("1_kbped")
 
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1170271161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6a6wx")
+stretch_mode = 5
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=831962157]
 layout_mode = 1
 anchors_preset = 15
@@ -53,7 +64,7 @@ grow_vertical = 2
 texture = ExtResource("1_0fbet")
 stretch_mode = 5
 
-[node name="Dialog" type="Panel" parent="." unique_id=62147116 node_paths=PackedStringArray("NextButton", "BackButton", "ExitButton", "ChoicePanel", "ChoiceContainer", "DialogPanel", "text", "character_name_text")]
+[node name="Dialog" type="Panel" parent="." unique_id=62147116 node_paths=PackedStringArray("NextButton", "BackButton", "ExitButton", "ChoicePanel", "ChoiceContainer", "LabelPanel", "DialogPanel", "DialogImage", "text", "character_name_text")]
 layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -71,7 +82,9 @@ ExitButton = NodePath("HBoxContainer/Exit")
 ChoiceButton = ExtResource("7_iy58a")
 ChoicePanel = NodePath("../Choices")
 ChoiceContainer = NodePath("../Choices/VBoxContainer")
+LabelPanel = NodePath("Panel")
 DialogPanel = NodePath(".")
+DialogImage = NodePath("../TextureRect")
 text = NodePath("Text")
 character_name_text = NodePath("Panel/Name")
 text_speed = 0.01

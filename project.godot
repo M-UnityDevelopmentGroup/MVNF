@@ -8,12 +8,20 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="M-Unity Visual Novel Framework (MVNF)"
 run/main_scene="res://control.tscn"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/deprecated_keyword=2
 
 [display]
 
@@ -23,4 +31,4 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
+enabled=PackedStringArray("res://addons/mvnf/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")

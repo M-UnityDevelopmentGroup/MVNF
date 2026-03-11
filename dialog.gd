@@ -9,7 +9,9 @@ signal proceed(type: String)
 @export var ChoiceButton: PackedScene
 @export var ChoicePanel: Panel
 @export var ChoiceContainer: BoxContainer
+@export var LabelPanel: Panel
 @export var DialogPanel: Panel
+@export var DialogImage: TextureRect
 @export var text: RichTextLabel
 @export var character_name_text: RichTextLabel
 @export var text_speed := 0.1
@@ -59,6 +61,10 @@ func handle_choice() -> bool:
 func handle_phrase() -> bool:
 	character_name_text.text = phrase.name
 	text.visible_characters = 0
+	if StoryJSON.data.characters.has(phrase.name):
+		DialogImage.texture = load(StoryJSON.data.characters.get(phrase.name).sprites.get(phrase.sprite))
+		LabelPanel.self_modulate = StoryJSON.data.characters.get(phrase.name).colors.main
+		
 	text.text = phrase.text
 	if phrase.has("font_size"):
 		text.set(&"theme_override_font_sizes/bold_italics_font_size", phrase.font_size)
