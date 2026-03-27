@@ -12,6 +12,7 @@ signal proceed(type: String)
 @export var LabelPanel: Panel
 @export var DialogPanel: Panel
 @export var DialogImage: TextureRect
+@export var BackgroundImage: TextureRect
 @export var text: RichTextLabel
 @export var character_name_text: RichTextLabel
 @export var text_speed := 0.1
@@ -64,6 +65,11 @@ func handle_phrase() -> bool:
 	if StoryJSON.data.characters.has(phrase.name):
 		DialogImage.texture = load(StoryJSON.data.characters.get(phrase.name).sprites.get(phrase.sprite))
 		LabelPanel.self_modulate = StoryJSON.data.characters.get(phrase.name).colors.main
+	if phrase.has("background") and StoryJSON.data.backgrounds.has(phrase.background):
+		BackgroundImage.texture = load(StoryJSON.data.backgrounds.get(phrase.background).sprites.get(phrase.background_type))
+		BackgroundImage.expand_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.expand_mode
+		BackgroundImage.stretch_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.stretch_mode
+		self_modulate = StoryJSON.data.backgrounds.get(phrase.background).colors.main
 		
 	text.text = phrase.text
 	if phrase.has("font_size"):
@@ -91,7 +97,8 @@ func exit() -> void:
 
 func back() -> void:
 	is_busy = false
-	if current_phrases.size() == 1:
+	if current_phrases.size() == 1 or current_index < 0:
+		current_index = 0
 		return
 	current_phrases.remove_at(current_index)
 	current_index -= 1
@@ -106,7 +113,6 @@ func next(next_index: int = -1) -> void:
 		current_text_speed = text_speed
 		current_phrases.resize(next_index+1)
 		current_phrases.insert(next_index, StoryJSON.data.phrases[next_index])
-		print(current_phrases[next_index].next)
 		current_index = next_index
 		create_tween().tween_property(ChoicePanel, "modulate:a", 0, 0.25)
 		await create_tween().tween_property(DialogPanel, "modulate:a", 1, 0.25).finished

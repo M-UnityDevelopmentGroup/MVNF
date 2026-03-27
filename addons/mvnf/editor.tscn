@@ -2,8 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://bmwrgfavtwtl2" path="res://main_theme.tres" id="1_2k1fq"]
 [ext_resource type="Script" uid="uid://dof7ka1a7mg07" path="res://addons/mvnf/editor.gd" id="1_orbl0"]
+[ext_resource type="PackedScene" uid="uid://d1tybt50k68aq" path="res://graph_node.tscn" id="2_7guw3"]
 
-[node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree")]
+[node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree", "graph")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,77 +13,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_orbl0")
 character_tree = NodePath("HSplitContainer/TabContainer/Characters/VBoxContainer/Tree")
+graph = NodePath("HSplitContainer/TabContainer2/GraphEdit")
+node_template = ExtResource("2_7guw3")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=879801920]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offsets = PackedInt32Array(1000)
-split_offset = 1000
+split_offsets = PackedInt32Array(1095)
+split_offset = 1095
 
-[node name="GraphEdit" type="GraphEdit" parent="HSplitContainer" unique_id=50568832]
+[node name="TabContainer2" type="TabContainer" parent="HSplitContainer" unique_id=2108797454]
 layout_mode = 2
+current_tab = 0
+
+[node name="GraphEdit" type="GraphEdit" parent="HSplitContainer/TabContainer2" unique_id=50568832]
+layout_mode = 2
+grid_pattern = 1
+right_disconnects = true
 type_names = {
 0: "Story"
 }
 minimap_enabled = false
 show_zoom_label = true
+show_grid_buttons = false
+show_minimap_button = false
+metadata/_tab_index = 0
 
-[node name="GraphNode2" type="GraphNode" parent="HSplitContainer/GraphEdit" unique_id=2135060242]
+[node name="GraphNode" parent="HSplitContainer/TabContainer2/GraphEdit" unique_id=1725803912 instance=ExtResource("2_7guw3")]
 layout_mode = 0
-offset_left = 337.0
-offset_top = 267.0
-offset_right = 543.0
-offset_bottom = 395.0
-mouse_filter = 1
-position_offset = Vector2(337, 267)
-resizable = true
-title = "phrase"
-slot/0/left_enabled = true
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = true
-slot/0/right_type = 0
-slot/0/right_color = Color(1, 1, 1, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
-
-[node name="Label" type="Label" parent="HSplitContainer/GraphEdit/GraphNode2" unique_id=564372118]
-layout_mode = 2
-text = "dd"
-
-[node name="GraphNode" type="GraphNode" parent="HSplitContainer/GraphEdit" unique_id=1175193686]
-layout_mode = 0
-offset_left = 695.0
-offset_top = 242.0
-offset_right = 937.0
-offset_bottom = 375.0
-mouse_filter = 1
-position_offset = Vector2(695, 242)
-resizable = true
-title = "phrase"
-slot/0/left_enabled = true
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = true
-slot/0/right_type = 0
-slot/0/right_color = Color(1, 1, 1, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
-
-[node name="Label" type="Label" parent="HSplitContainer/GraphEdit/GraphNode" unique_id=333730566]
-layout_mode = 2
-text = "dd"
-
-[node name="Button" type="Button" parent="HSplitContainer/GraphEdit" unique_id=1517977950]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 507.0
+offset_top = 145.0
+offset_right = 749.0
+offset_bottom = 690.0
+position_offset = Vector2(507, 145)
 
 [node name="TabContainer" type="TabContainer" parent="HSplitContainer" unique_id=609807139]
 layout_mode = 2
@@ -102,10 +70,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="HSplitContainer/TabContainer/Characters/VBoxContainer" unique_id=1897663156]
-layout_mode = 2
-text = "v"
-
 [node name="Tree" type="Tree" parent="HSplitContainer/TabContainer/Characters/VBoxContainer" unique_id=2060893578]
 layout_mode = 2
 size_flags_vertical = 3
@@ -114,3 +78,59 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=513760714]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -3.0
+offset_bottom = 29.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1148013958]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBar" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1114572388]
+layout_mode = 2
+size_flags_horizontal = 3
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="Panel/HBoxContainer/MenuBar" unique_id=734710699]
+oversampling_override = 1.0
+title = "Story"
+size = Vector2i(157, 120)
+item_count = 5
+item_0/text = "New Story"
+item_0/id = 0
+item_1/text = "Open Story..."
+item_1/id = 1
+item_2/id = 2
+item_2/separator = true
+item_3/text = "Save Story"
+item_3/id = 3
+item_4/text = "Save Story As..."
+item_4/id = 4
+
+[node name="MenuBar2" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1617308216]
+layout_mode = 2
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="Panel/HBoxContainer/MenuBar2" unique_id=1749874465]
+oversampling_override = 1.0
+title = "Create..."
+size = Vector2i(133, 100)
+item_count = 3
+item_0/text = "Node"
+item_0/id = 0
+item_1/text = "Character"
+item_1/id = 1
+item_2/text = "Background"
+item_2/id = 2
+
+[connection signal="id_pressed" from="Panel/HBoxContainer/MenuBar/PopupMenu" to="." method="_manage_stories"]
+[connection signal="id_pressed" from="Panel/HBoxContainer/MenuBar2/PopupMenu" to="." method="_manage_nodes"]

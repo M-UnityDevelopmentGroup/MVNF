@@ -18,12 +18,37 @@
 			}
 		},
 	},
-	
+	"backgrounds": {
+		"Village": {
+			"sprites": {
+				"normal": "res://Sprites/Backgrounds/spr_background.PNG",
+				"minecraft": "res://Sprites/Backgrounds/default.jpg"
+			},
+			"colors": {
+				"main": "#AA0000"
+			},
+			"settings": {
+				"expand_mode": 0,
+				"stretch_mode": 0
+			}
+		},
+		"icon.svg": {
+			"sprites": {
+				"normal": "res://icon.svg",
+				"angry": "res://Sprites/Characters/Boris/BorisAngry.png"
+			},
+			"colors": {
+				"main": "#0000AA"
+			}
+		},
+	},
 	"phrases": [
 		{
 			"type": "text",
 			"name": "Godot",
 			"sprite": "happy",
+			"background": "Village",
+			"background_type": "normal",
 			"text": "AAAA",
 			"next": 1
 		},
@@ -31,6 +56,8 @@
 			"type": "text",
 			"name": "Unity",
 			"sprite": "angry",
+			"background": "Village",
+			"background_type": "minecraft",
 			"text": "DDDD",
 			"next": 2
 		},
@@ -38,6 +65,8 @@
 			"type": "text",
 			"name": "Good",
 			"text": "DICT",
+			"background": "Village",
+			"background_type": "normal",
 			"next": 3
 		},
 		{
