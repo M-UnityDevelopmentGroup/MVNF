@@ -82,8 +82,6 @@ func _remove_choice(choice: Choice) -> void:
 	node_choices.erase(choice.choice_edit.text)
 	choice.queue_free()
 	choice_templates.erase(choice)
-	
-
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

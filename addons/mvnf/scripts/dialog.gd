@@ -24,6 +24,8 @@ var phrase: Dictionary
 var running := true
 var is_busy: bool
 var temp_choice_button: Button
+var font_types = ["normal_font_size", "bold_font_size", "italics_font_size", "bold_italics_font_size", "mono_font_size"]
+
 func _ready() -> void:
 	NextButton.pressed.connect(next)
 	BackButton.pressed.connect(back)
@@ -70,14 +72,10 @@ func handle_phrase() -> bool:
 		BackgroundImage.expand_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.expand_mode
 		BackgroundImage.stretch_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.stretch_mode
 		self_modulate = StoryJSON.data.backgrounds.get(phrase.background).colors.main
-		
 	text.text = phrase.text
 	if phrase.has("font_size"):
-		text.set(&"theme_override_font_sizes/bold_italics_font_size", phrase.font_size)
-		text.set(&"theme_override_font_sizes/italics_font_size", phrase.font_size)
-		text.set(&"theme_override_font_sizes/mono_font_size", phrase.font_size)
-		text.set(&"theme_override_font_sizes/normal_font_size", phrase.font_size)
-		text.set(&"theme_override_font_sizes/bold_font_size", phrase.font_size)
+		for font_type in font_types:
+			text.add_theme_font_size_override(font_type, phrase.font_size)
 	else: 
 		text.do_resize_text()
 	is_busy = true
