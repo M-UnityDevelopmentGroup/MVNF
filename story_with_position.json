@@ -1,0 +1,186 @@
+{
+	"backgrounds": {
+		"Village": {
+			"colors": {
+				"main": "#AA0000"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sprites": {
+				"minecraft": "res://Sprites/Backgrounds/default.jpg",
+				"normal": "res://Sprites/Backgrounds/spr_background.PNG"
+			}
+		},
+		"icon.svg": {
+			"colors": {
+				"main": "#0000AA"
+			},
+			"sprites": {
+				"angry": "res://Sprites/Characters/Boris/BorisAngry.png",
+				"normal": "res://icon.svg"
+			}
+		}
+	},
+	"characters": {
+		"Godot": {
+			"colors": {
+				"main": "#3232FF"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://iconred.svg",
+				"happy": "res://icon.svg"
+			}
+		},
+		"Unity": {
+			"colors": {
+				"main": "#FF3232"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"angry": "res://Sprites/Characters/Boris/BorisAngry.png",
+				"default": "res://Sprites/Characters/Boris/BorisNormal.png",
+				"happy": "res://Sprites/Characters/Boris/BorisShocked.png"
+			}
+		}
+	},
+	"phrases": [
+		{
+			"background": "Village",
+			"background_type": "normal",
+			"editor_transform": {
+				"position_x": -240.0,
+				"position_y": -540.0,
+				"size_x": 300.0,
+				"size_y": 500.000183105469
+			},
+			"name": "Godot",
+			"next": 1.0,
+			"sprite": "happy",
+			"text": "AAAA",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "minecraft",
+			"editor_transform": {
+				"position_x": -400,
+				"position_y": 860,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 2.0,
+			"sprite": "angry",
+			"text": "DDDD",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "normal",
+			"editor_transform": {
+				"position_x": 1280,
+				"position_y": 20,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"next": 3.0,
+			"text": "DICT",
+			"type": "text"
+		},
+		{
+			"editor_transform": {
+				"position_x": 1360,
+				"position_y": 1140,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 4.0,
+			"text": "HDD",
+			"type": "text"
+		},
+		{
+			"editor_transform": {
+				"position_x": -780,
+				"position_y": 1400,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 5.0,
+			"text": "12/08/2025",
+			"type": "text"
+		},
+		{
+			"choices": {
+				"After": 7.0,
+				"Free": 8.0,
+				"Use": 6.0
+			},
+			"editor_transform": {
+				"position_x": 260,
+				"position_y": 960,
+				"size_x": 300,
+				"size_y": 525
+			},
+			"name": "Unity",
+			"text": "12/08/2025",
+			"type": "choice"
+		},
+		{
+			"editor_transform": {
+				"position_x": 440,
+				"position_y": -900,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"next": 0.0,
+			"text": "Start from the beginning",
+			"type": "text"
+		},
+		{
+			"editor_transform": {
+				"position_x": 2860,
+				"position_y": -740,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 5.0,
+			"text": "choose again",
+			"type": "text"
+		},
+		{
+			"editor_transform": {
+				"position_x": -1080,
+				"position_y": 60,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 9.0,
+			"text": "DDDD Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved.",
+			"type": "text"
+		},
+		{
+			"editor_transform": {
+				"position_x": 700,
+				"position_y": 160,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Good",
+			"text": "End",
+			"type": "text"
+		}
+	]
+}

@@ -3,18 +3,29 @@ class_name StoryNode
 extends GraphNode
 @export var type_button: OptionButton
 @export var node_text_edit: TextEdit
+@export var node_name_option: OptionButton
 @export var choice_button: Button
 @export var choice_label: Label
 @export var text_label: Label
-@export var text_edit_label: Label 
+@export var text_edit_label: Label
+@export var text_edit: TextEdit
 @export var choice_template: PackedScene
 @export var choice_slot_offset: int
 @export var node_popup: PopupMenu
-var node_name: String
+@export var default_transform: Dictionary[String, int] = {
+	"position_x": 0,
+	"position_y": 0,
+	"size_x": 300,
+	"size_y": 500
+}
+var current_editor: StoryEditor
+var current_graph_edit: GraphEdit
+var node_id: int
+var node_name: int
 var node_type: node_types
 var node_text: String
 var node_choices: Dictionary[String, int]
-
+var node_data: Dictionary
 var choice_templates: Array[Choice]
 var temp_text_edit_size: float
 var temp_choice: Choice
@@ -23,26 +34,73 @@ enum node_types {
 	text,
 	choice
 }
+
 func _ready() -> void:
 	type_button.item_selected.connect(_change_type)
+	dragged.connect(_update_position)
+	resize_end.connect(_update_size)
+	text_edit.text_changed.connect(_update_text)
 	if not choice_button.pressed.is_connected(_create_choice):
 		choice_button.pressed.connect(_create_choice)
 	_change_type(0)
 
-func set_node_properties(type: String = "text", text: String = "", choices: Dictionary[String, int] = {}) -> void:
-	match type:
+func _update_position(_from: Vector2, to: Vector2) -> void:
+	node_data.editor_transform.position_x = to.x
+	node_data.editor_transform.position_y = to.y
+
+func _update_size(new_size: Vector2):
+	node_data.editor_transform.size_x = new_size.x
+	node_data.editor_transform.size_y = new_size.y
+	
+func _update_text() -> void:
+	node_data.text = text_edit.text
+
+func set_node_properties(phrase: Dictionary, id: int, edit: GraphEdit, editor: StoryEditor) -> bool:
+	current_graph_edit = edit
+	current_editor = editor
+	node_id = id
+	name = str(id)
+	title = str(id)
+	node_data = phrase.duplicate(true)
+	match node_data.type:
 		"text":
 			_change_type(0)
 		"choice":
 			_change_type(1)
-	node_choices = choices
-	for i in node_choices:
-		_create_choice()
-	node_text_edit.text = text
+	if node_data.has("choices"):
+		for i in node_data.choices:
+			_create_choice(i, node_data.choices.get_or_add(i, 0))
+	node_data.get_or_add("editor_transform", default_transform)
+	position_offset.x = node_data.editor_transform.position_x
+	position_offset.y = node_data.editor_transform.position_y
+	size.x = node_data.editor_transform.size_x
+	size.y = node_data.editor_transform.size_y
+	for i in editor.character_enum:
+		node_name_option.add_item(i)
+	if not node_data.name in editor.character_enum and not editor.character_enum.is_empty():
+		node_data.name = editor.character_enum.keys()[0]
+		node_name_option.selected = 0
+	elif editor.character_enum.is_empty():
+		node_data.name = ""
+		node_name_option.selected = -1
+	else:
+		node_name_option.selected = editor.character_enum[node_data.name]
+	node_text_edit.text = node_data.text
+	return true
+
+func set_node_connections(edit: GraphEdit) -> void:
+	print(node_data.has("next"))
+	if not node_data.has("next"):
+		return
+	for i in edit.find_children("*", "StoryNode"):
+		if i.node_id == node_data.next:
+			print(self.name)
+			print(i.name)
+			edit.connect_node(self.name, 13, i.name, 0)
+			return
 	
 func _change_type(index: int) -> void:
 	node_type = index as node_types
-	
 	match node_type:
 		node_types.text:
 			text_label.show()
@@ -61,7 +119,6 @@ func _change_type(index: int) -> void:
 			for i in choice_templates:
 				i.show()
 				size.y += type_button.size.y
-	print(node_type)
 	
 func _create_choice(text: String = "Choice", path: int = -1) -> void:
 	if node_choices.has(text):
@@ -72,7 +129,6 @@ func _create_choice(text: String = "Choice", path: int = -1) -> void:
 	temp_choice.remove_button.pressed.connect(_remove_choice.bind(temp_choice))
 	choice_templates.append(temp_choice)
 	size.y += temp_choice_size_y
-	print(text)
 	add_child(temp_choice)
 	set_slot_enabled_right(node_choices.size()+choice_slot_offset, true)
 	#set_slot_metadata_right(choices.size()+choice_slot_offset, choices.size()+choice_slot_offset)

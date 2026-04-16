@@ -42,15 +42,6 @@ show_zoom_label = true
 show_grid_buttons = false
 show_minimap_button = false
 
-[node name="GraphNode" parent="HSplitContainer/GraphEdit" unique_id=1725803912 instance=ExtResource("2_7guw3")]
-layout_mode = 0
-offset_left = 507.0
-offset_top = 145.0
-offset_right = 749.0
-offset_bottom = 989.0
-rotation = -6.2831855
-position_offset = Vector2(507, 145)
-
 [node name="TabContainer" type="TabContainer" parent="HSplitContainer" unique_id=609807139]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0

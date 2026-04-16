@@ -20,6 +20,7 @@ signal proceed(type: String)
 var current_text_speed: float 
 var current_phrases: Array[Dictionary]
 var current_index: int
+var history: Array[int]
 var phrase: Dictionary
 var running := true
 var is_busy: bool
@@ -31,7 +32,7 @@ func _ready() -> void:
 	BackButton.pressed.connect(back)
 	ExitButton.pressed.connect(exit)
 	current_text_speed = text_speed
-	current_phrases.append(StoryJSON.data.phrases[0])
+	current_phrases.append_array(StoryJSON.data.phrases)
 	await show_phrase()
 	exit()
 
@@ -64,10 +65,12 @@ func handle_choice() -> bool:
 func handle_phrase() -> bool:
 	character_name_text.text = phrase.name
 	text.visible_characters = 0
+	phrase.get_or_add("sprite", "default")
 	if StoryJSON.data.characters.has(phrase.name):
 		DialogImage.texture = load(StoryJSON.data.characters.get(phrase.name).sprites.get(phrase.sprite))
 		LabelPanel.self_modulate = StoryJSON.data.characters.get(phrase.name).colors.main
-	if phrase.has("background") and StoryJSON.data.backgrounds.has(phrase.background):
+	phrase.get_or_add("background", "default")
+	if StoryJSON.data.backgrounds.has(phrase.background):
 		BackgroundImage.texture = load(StoryJSON.data.backgrounds.get(phrase.background).sprites.get(phrase.background_type))
 		BackgroundImage.expand_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.expand_mode
 		BackgroundImage.stretch_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.stretch_mode
@@ -95,11 +98,10 @@ func exit() -> void:
 
 func back() -> void:
 	is_busy = false
-	if current_phrases.size() == 1 or current_index < 0:
+	if current_phrases.size() == 1 or current_index < 0 or history.is_empty():
 		current_index = 0
 		return
-	current_phrases.remove_at(current_index)
-	current_index -= 1
+	current_index = history.pop_at(-1)
 	proceed.emit()
 
 func next(next_index: int = -1) -> void:
@@ -109,8 +111,7 @@ func next(next_index: int = -1) -> void:
 	if next_index != -1:
 		ChoiceContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		current_text_speed = text_speed
-		current_phrases.resize(next_index+1)
-		current_phrases.insert(next_index, StoryJSON.data.phrases[next_index])
+		history.append(current_index)
 		current_index = next_index
 		create_tween().tween_property(ChoicePanel, "modulate:a", 0, 0.25)
 		await create_tween().tween_property(DialogPanel, "modulate:a", 1, 0.25).finished
@@ -118,7 +119,7 @@ func next(next_index: int = -1) -> void:
 			choice.queue_free()
 	elif phrase.has("next"):
 		current_text_speed = text_speed
-		current_phrases.append(StoryJSON.data.phrases[int(phrase.next)])
+		history.append(current_index)
 		current_index = phrase.next
 	else:
 		running = false

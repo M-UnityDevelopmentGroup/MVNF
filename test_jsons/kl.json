@@ -1,0 +1,46 @@
+{
+	"backgrounds": {
+
+	},
+	"characters": {
+
+	},
+	"phrases": [
+		{
+			"background": "",
+			"background_type": "",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": -1420.0,
+				"position_y": 420.0,
+				"size_x": 0,
+				"size_y": 0
+			},
+			"name": "",
+			"next": 0,
+			"sprite": "",
+			"text": "ffdfdggdf",
+			"type": ""
+		},
+		{
+			"background": "",
+			"background_type": "",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": -1420.0,
+				"position_y": 420.0,
+				"size_x": 0,
+				"size_y": 0
+			},
+			"name": "",
+			"next": 0,
+			"sprite": "",
+			"text": "dfgfgd",
+			"type": ""
+		}
+	]
+}

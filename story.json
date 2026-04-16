@@ -2,6 +2,7 @@
 	"characters": {
 		"Godot": {
 			"sprites": {
+				"default": "res://iconred.svg",
 				"happy": "res://icon.svg"
 			},
 			"colors": {
@@ -12,7 +13,8 @@
 		},
 		"Unity": {
 			"sprites": {
-				"happy": "res://icon.svg",
+				"default": "res://Sprites/Characters/Boris/BorisNormal.png",
+				"happy": "res://Sprites/Characters/Boris/BorisShocked.png",
 				"angry": "res://Sprites/Characters/Boris/BorisAngry.png"
 			},
 			"colors": {
@@ -55,9 +57,11 @@
 			"background_type": "normal",
 			"text": "AAAA",
 			"next": 1,
-			"editor_position": {
-				"x": 10,
-				"y": 10
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 200,
+				"size_y": 500
 			}
 		},
 		{
@@ -71,7 +75,7 @@
 		},
 		{
 			"type": "text",
-			"name": "Good",
+			"name": "Godot",
 			"text": "DICT",
 			"background": "Village",
 			"background_type": "normal",
@@ -79,19 +83,19 @@
 		},
 		{
 			"type": "text",
-			"name": "GHDDD",
+			"name": "Unity",
 			"text": "HDD",
 			"next": 4
 		},
 		{
 			"type": "text",
-			"name": "Goot",
+			"name": "Unity",
 			"text": "12/08/2025",
 			"next": 5
 		},
 		{
 			"type": "choice",
-			"name": "Goot",
+			"name": "Unity",
 			"choices": {
 				"Use": 6,
 				"After": 7,
@@ -101,19 +105,19 @@
 		},
 		{
 			"type": "text",
-			"name": "USE after free",
-			"text": "Copyright (c) 2025 Author. All Rights Reserved.",
-			"next": 8
+			"name": "Godot",
+			"text": "Start from the beginning",
+			"next": 0
 		},
 		{
 			"type": "text",
-			"name": "use AFTER free",
-			"text": "2025-12-08 10:31",
-			"next": 8
+			"name": "Unity",
+			"text": "choose again",
+			"next": 5
 		},
 		{
 			"type": "text",
-			"name": "use after FREE",
+			"name": "Unity",
 			"text": "DDDD Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved.",
 			"next": 9
 		},

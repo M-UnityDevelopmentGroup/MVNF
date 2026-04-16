@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://b8gke6y07aytw" path="res://addons/mvnf/scripts/story_node.gd" id="1_7nebk"]
 [ext_resource type="PackedScene" uid="uid://cps2n2dhjxfhp" path="res://addons/mvnf/prefabs/choice_template.tscn" id="2_cewil"]
 
-[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "choice_button", "choice_label", "text_label", "text_edit_label", "node_popup")]
-custom_minimum_size = Vector2(200, 500)
-offset_right = 280.0
-offset_bottom = 395.0
+[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
+custom_minimum_size = Vector2(300, 500)
+offset_right = 300.0
+offset_bottom = 523.0
 mouse_filter = 1
 resizable = true
 slot/0/left_enabled = true
@@ -40,7 +40,7 @@ slot/3/left_enabled = false
 slot/3/left_type = 0
 slot/3/left_color = Color(1, 1, 1, 1)
 slot/3/left_icon = null
-slot/3/right_enabled = true
+slot/3/right_enabled = false
 slot/3/right_type = 0
 slot/3/right_color = Color(1, 1, 1, 1)
 slot/3/right_icon = null
@@ -130,7 +130,7 @@ slot/13/left_enabled = false
 slot/13/left_type = 0
 slot/13/left_color = Color(1, 1, 1, 1)
 slot/13/left_icon = null
-slot/13/right_enabled = false
+slot/13/right_enabled = true
 slot/13/right_type = 0
 slot/13/right_color = Color(1, 1, 1, 1)
 slot/13/right_icon = null
@@ -145,14 +145,16 @@ slot/14/right_color = Color(1, 1, 1, 1)
 slot/14/right_icon = null
 slot/14/draw_stylebox = true
 script = ExtResource("1_7nebk")
-type_button = NodePath("OptionButton")
+type_button = NodePath("NodeType")
 node_text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
+node_name_option = NodePath("NodeName")
 choice_button = NodePath("choices/Button")
 choice_label = NodePath("choices")
 text_label = NodePath("TextLabel")
 text_edit_label = NodePath("TextEditLabel")
+text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
 choice_template = ExtResource("2_cewil")
-choice_slot_offset = 4
+choice_slot_offset = 12
 node_popup = NodePath("PopupMenu")
 
 [node name="TypeLabel" type="Label" parent="." unique_id=553063356]
@@ -160,7 +162,7 @@ layout_mode = 2
 text = "type:"
 vertical_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="." unique_id=837494092]
+[node name="NodeType" type="OptionButton" parent="." unique_id=837494092]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -174,10 +176,8 @@ layout_mode = 2
 text = "name:"
 vertical_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="." unique_id=733769918]
+[node name="NodeName" type="OptionButton" parent="." unique_id=1569017145]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Enter name..."
 
 [node name="TypeLabel3" type="Label" parent="." unique_id=1397788188]
 layout_mode = 2
@@ -188,6 +188,16 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter sprite..."
+
+[node name="TypeLabel5" type="Label" parent="." unique_id=91229242]
+layout_mode = 2
+text = "sound:"
+vertical_alignment = 1
+
+[node name="LineEdit4" type="LineEdit" parent="." unique_id=147169724]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter sound..."
 
 [node name="TypeLabel4" type="Label" parent="." unique_id=900836212]
 layout_mode = 2
@@ -208,16 +218,6 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Enter type..."
-
-[node name="TypeLabel5" type="Label" parent="." unique_id=91229242]
-layout_mode = 2
-text = "sound:"
-vertical_alignment = 1
-
-[node name="LineEdit4" type="LineEdit" parent="." unique_id=147169724]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Enter sound..."
 
 [node name="TextLabel" type="Label" parent="." unique_id=1140021939]
 layout_mode = 2
@@ -266,6 +266,7 @@ expand_icon = true
 [node name="PopupMenu" type="PopupMenu" parent="." unique_id=265104747]
 oversampling_override = 1.0
 initial_position = 1
+size = Vector2i(114, 100)
 content_scale_mode = 1
 system_menu_id = 3
 prefer_native_menu = true
