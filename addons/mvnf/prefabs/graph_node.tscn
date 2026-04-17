@@ -3,15 +3,16 @@
 [ext_resource type="Script" uid="uid://b8gke6y07aytw" path="res://addons/mvnf/scripts/story_node.gd" id="1_7nebk"]
 [ext_resource type="PackedScene" uid="uid://cps2n2dhjxfhp" path="res://addons/mvnf/prefabs/choice_template.tscn" id="2_cewil"]
 
-[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
+[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "node_sprite_option", "node_sound_option", "node_background_option", "node_background_type_option", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
 custom_minimum_size = Vector2(300, 500)
 offset_right = 300.0
-offset_bottom = 523.0
+offset_bottom = 592.0
 mouse_filter = 1
 resizable = true
+ignore_invalid_connection_type = true
 slot/0/left_enabled = true
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_type = 1
+slot/0/left_color = Color(0.6666667, 0.6666667, 0.6666667, 1)
 slot/0/left_icon = null
 slot/0/right_enabled = false
 slot/0/right_type = 0
@@ -131,7 +132,7 @@ slot/13/left_type = 0
 slot/13/left_color = Color(1, 1, 1, 1)
 slot/13/left_icon = null
 slot/13/right_enabled = true
-slot/13/right_type = 0
+slot/13/right_type = 1
 slot/13/right_color = Color(1, 1, 1, 1)
 slot/13/right_icon = null
 slot/13/draw_stylebox = true
@@ -148,16 +149,20 @@ script = ExtResource("1_7nebk")
 type_button = NodePath("NodeType")
 node_text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
 node_name_option = NodePath("NodeName")
+node_sprite_option = NodePath("NodeSprite")
+node_sound_option = NodePath("NodeSound")
+node_background_option = NodePath("NodeBackground")
+node_background_type_option = NodePath("NodeBackgroundType")
 choice_button = NodePath("choices/Button")
 choice_label = NodePath("choices")
 text_label = NodePath("TextLabel")
 text_edit_label = NodePath("TextEditLabel")
 text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
 choice_template = ExtResource("2_cewil")
-choice_slot_offset = 12
+choice_slot_offset = 13
 node_popup = NodePath("PopupMenu")
 
-[node name="TypeLabel" type="Label" parent="." unique_id=553063356]
+[node name="Type" type="Label" parent="." unique_id=553063356]
 layout_mode = 2
 text = "type:"
 vertical_alignment = 1
@@ -171,7 +176,7 @@ popup/item_0/id = 0
 popup/item_1/text = "choice"
 popup/item_1/id = 1
 
-[node name="TypeLabel2" type="Label" parent="." unique_id=2143257911]
+[node name="Name" type="Label" parent="." unique_id=2143257911]
 layout_mode = 2
 text = "name:"
 vertical_alignment = 1
@@ -179,49 +184,41 @@ vertical_alignment = 1
 [node name="NodeName" type="OptionButton" parent="." unique_id=1569017145]
 layout_mode = 2
 
-[node name="TypeLabel3" type="Label" parent="." unique_id=1397788188]
+[node name="Sprite" type="Label" parent="." unique_id=1397788188]
 layout_mode = 2
 text = "sprite:"
 vertical_alignment = 1
 
-[node name="LineEdit2" type="LineEdit" parent="." unique_id=44628885]
+[node name="NodeSprite" type="OptionButton" parent="." unique_id=294731690]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Enter sprite..."
 
-[node name="TypeLabel5" type="Label" parent="." unique_id=91229242]
+[node name="Sound" type="Label" parent="." unique_id=91229242]
 layout_mode = 2
 text = "sound:"
 vertical_alignment = 1
 
-[node name="LineEdit4" type="LineEdit" parent="." unique_id=147169724]
+[node name="NodeSound" type="OptionButton" parent="." unique_id=387958083]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Enter sound..."
 
-[node name="TypeLabel4" type="Label" parent="." unique_id=900836212]
+[node name="Background" type="Label" parent="." unique_id=900836212]
 layout_mode = 2
 text = "background:"
 vertical_alignment = 1
 
-[node name="LineEdit3" type="LineEdit" parent="." unique_id=1487212845]
+[node name="NodeBackground" type="OptionButton" parent="." unique_id=1992911741]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Enter background..."
 
-[node name="TypeLabel6" type="Label" parent="." unique_id=1620426135]
+[node name="BackgroundType" type="Label" parent="." unique_id=1620426135]
 layout_mode = 2
 text = "background_type:"
 vertical_alignment = 1
 
-[node name="LineEdit5" type="LineEdit" parent="." unique_id=1828991400]
+[node name="NodeBackgroundType" type="OptionButton" parent="." unique_id=2046633694]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Enter type..."
 
 [node name="TextLabel" type="Label" parent="." unique_id=1140021939]
 layout_mode = 2
-text = "text:"
+text = "text"
 vertical_alignment = 1
 
 [node name="TextEditLabel" type="Label" parent="." unique_id=1049363397]

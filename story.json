@@ -2,8 +2,8 @@
 	"characters": {
 		"Godot": {
 			"sprites": {
-				"default": "res://iconred.svg",
-				"happy": "res://icon.svg"
+				"default": "res://icon.svg",
+				"happy": "res://iconred.svg"
 			},
 			"colors": {
 				"main": "#3232FF"
@@ -41,10 +41,14 @@
 		"icon.svg": {
 			"sprites": {
 				"normal": "res://icon.svg",
-				"angry": "res://Sprites/Characters/Boris/BorisAngry.png"
+				"angry": "res://Sprites/Backgrounds/GIMPS.png"
 			},
 			"colors": {
 				"main": "#0000AA"
+			},
+			"settings": {
+				"expand_mode": 0,
+				"stretch_mode": 0
 			}
 		},
 	},
@@ -90,6 +94,8 @@
 		{
 			"type": "text",
 			"name": "Unity",
+			"background": "icon.svg",
+			"background_type": "angry",
 			"text": "12/08/2025",
 			"next": 5
 		},

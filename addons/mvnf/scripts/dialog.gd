@@ -82,7 +82,7 @@ func handle_phrase() -> bool:
 	else: 
 		text.do_resize_text()
 	is_busy = true
-	while not text.visible_characters == len(phrase.text):
+	while not text.visible_characters >= len(phrase.text):
 		text.visible_characters += 1
 		if is_busy:
 			await get_tree().create_timer(current_text_speed).timeout

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dof7ka1a7mg07" path="res://addons/mvnf/scripts/editor.gd" id="1_orbl0"]
 [ext_resource type="PackedScene" uid="uid://d1tybt50k68aq" path="res://addons/mvnf/prefabs/graph_node.tscn" id="2_7guw3"]
 
-[node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree", "background_tree", "graph", "story_actions_popup")]
+[node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree", "background_tree", "graph", "story_path_label", "story_actions_popup")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,7 @@ script = ExtResource("1_orbl0")
 character_tree = NodePath("HSplitContainer/TabContainer/Characters/VBoxContainer/Tree")
 background_tree = NodePath("HSplitContainer/TabContainer/Backgrounds/VBoxContainer/Tree")
 graph = NodePath("HSplitContainer/GraphEdit")
+story_path_label = NodePath("Panel/HBoxContainer/Label")
 node_template = ExtResource("2_7guw3")
 story_actions_popup = NodePath("Panel/HBoxContainer/MenuBar/StoryActions")
 
@@ -34,9 +35,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 grid_pattern = 1
 right_disconnects = true
-type_names = {
-0: "Story"
-}
+connection_lines_curvature = 0.25
+connection_lines_thickness = 2.0
+zoom_max = 4.0
 minimap_enabled = false
 show_zoom_label = true
 show_grid_buttons = false
@@ -103,7 +104,6 @@ grow_vertical = 2
 
 [node name="MenuBar" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1114572388]
 layout_mode = 2
-size_flags_horizontal = 3
 flat = true
 
 [node name="StoryActions" type="PopupMenu" parent="Panel/HBoxContainer/MenuBar" unique_id=734710699]
@@ -123,6 +123,17 @@ item_3/disabled = true
 item_4/text = "Save Story As..."
 item_4/id = 3
 item_4/disabled = true
+
+[node name="Label" type="RichTextLabel" parent="Panel/HBoxContainer" unique_id=1888465524]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+text = "No story"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+selection_enabled = true
 
 [node name="MenuBar2" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1617308216]
 layout_mode = 2
