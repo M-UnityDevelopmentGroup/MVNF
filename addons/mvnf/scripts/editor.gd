@@ -3,11 +3,14 @@ extends Control
 class_name StoryEditor
 @export var character_tree: Tree
 @export var background_tree: Tree
+@export var character_edit: CodeEdit
+@export var background_edit: CodeEdit
 @export var graph: GraphEdit
 @export var story_path_label: RichTextLabel
 @export var node_template: PackedScene
 @export var story_actions_popup: PopupMenu
-@onready var file_dialog := FileDialog.new()
+@export var create_actions_popup: MenuBar
+@export var file_dialog: FileDialog
 var current_story: Dictionary
 var character_items: Dictionary[String,Array]
 var background_items: Dictionary[String,Array]
@@ -19,9 +22,9 @@ var sound_enum: Dictionary[String, Dictionary]
 var temp_node: StoryNode
 var temp_node_data: Dictionary
 var nodes: Array[StoryNode]
-var temp_item: TreeItem
-var temp_item_parent: TreeItem
-var temp_temp_item_parent: TreeItem
+#var temp_item: TreeItem
+#var temp_item_parent: TreeItem
+#var temp_temp_item_parent: TreeItem
 var temp_array: Array[TreeItem]
 var temp_enum: Dictionary[String, int]
 var tempi: int
@@ -30,22 +33,45 @@ var story_path: String
 var current_story_action: story_actions
 var story_template: Dictionary = {
 	"characters": {
+		"default": {
+			"sprites": {
+				"default": "res://icon.svg"
+			},
+			"colors": {
+				"main": "6464FF"
+			},
+			"sounds": {
+			}
+		}
 	},
 	"backgrounds": {
+		"default": {
+			"sprites": {
+				"default": "res://icon.svg"
+			},
+			"colors": {
+				"main": "6464FF"
+			},
+			"sounds": {
+			},
+			"settings": {
+				"expand_mode": 0,
+				"stretch_mode": 0
+			}
+		}
 	},
 	"phrases": [
 	]
 }
 var template: Dictionary = {
 	"type": "text",
-	"name": "",
-	"sprite": "",
-	"background": "",
-	"background_type": "",
+	"name": "default",
+	"sprite": "default",
+	"background": "default",
+	"background_type": "default",
 	"text": "",
 	"choices": {
 	},
-	"next": 0,
 	"editor_transform": {
 		"position_x": 0,
 		"position_y": 0,
@@ -90,48 +116,43 @@ func _ready() -> void:
 		graph.connection_request.connect(connect_nodes)
 	if not graph.disconnection_request.is_connected(disconnect_nodes):
 		graph.disconnection_request.connect(disconnect_nodes)
-	
-	file_dialog.access = FileDialog.ACCESS_RESOURCES
-	file_dialog.display_mode = FileDialog.DISPLAY_LIST
-	file_dialog.add_filter("*.json", "JSON")
 	file_dialog.file_selected.connect(_process_file)
-	add_child(file_dialog)
 	
-func _list_resourses(resourses: Dictionary, tree: Tree, items: Dictionary[String,Array], enums: Dictionary[String, int]):
-	tree.clear()
-	tree.set_column_custom_minimum_width(0, 200)
-	tree.set_column_expand(0,false)
-	temp_item_parent = tree.create_item()
-	for i in resourses:
-		enums.get_or_add(i, len(enums))
-		_list_item(i, resourses, tree, items.get_or_add(i, items.get_or_add(i, temp_array)))
-		temp_item_parent = tree.get_root()
-		
 func _list_resourses_to_enum(resourses: Dictionary, enums: Dictionary[String, int]):
 	for i in resourses:
 		enums.get_or_add(i, len(enums))
 		
 func _list_resourses_to_enum_dict(resourses: Dictionary, enums: Dictionary[String, Dictionary], key: String):
+	temp_enum.clear()
 	for i in resourses:
 		temp_enum.get_or_add(i, len(temp_enum))
 	enums.get_or_add(key,temp_enum.duplicate(true))
+	
+#func _list_resourses(resourses: Dictionary, tree: Tree, items: Dictionary[String,Array], enums: Dictionary[String, int]):
+	#tree.clear()
+	#tree.set_column_custom_minimum_width(0, 200)
+	#tree.set_column_expand(0,false)
+	#temp_item_parent = tree.create_item()
+	#for i in resourses:
+		#enums.get_or_add(i, len(enums))
+		#_list_item(i, resourses, tree, items.get_or_add(i, items.get_or_add(i, temp_array)))
+		#temp_item_parent = tree.get_root()
 
-
-func _list_item(item: Variant, resourses: Dictionary, tree: Tree, items: Array[TreeItem], parent: TreeItem = null) -> void:
-	temp_item = tree.create_item(temp_item_parent if parent == null else parent)
-	temp_item.set_text(0, item)
-	items.append(temp_item)
-	if parent == null:
-		temp_item_parent = temp_item
-	if typeof(resourses.get(item)) == TYPE_DICTIONARY:
-		temp_item.add_button(1, get_theme_icon("Add", "EditorIcons"))
-		temp_temp_item_parent = temp_item
-		for i in resourses.get(item):
-			_list_item(i, resourses.get(item), tree, items, temp_temp_item_parent)
-	elif not resourses.get(item) == null:
-		temp_item.set_editable(0, true)
-		temp_item.set_text(1, str(resourses.get(item)))
-		temp_item.set_editable(1, true)
+#func _list_item(item: Variant, resourses: Dictionary, tree: Tree, items: Array[TreeItem], parent: TreeItem = null) -> void:
+	#temp_item = tree.create_item(temp_item_parent if parent == null else parent)
+	#temp_item.set_text(0, item)
+	#items.append(temp_item)
+	#if parent == null:
+		#temp_item_parent = temp_item
+	#if typeof(resourses.get(item)) == TYPE_DICTIONARY:
+		#temp_item.add_button(1, get_theme_icon("Add", "EditorIcons"))
+		#temp_temp_item_parent = temp_item
+		#for i in resourses.get(item):
+			#_list_item(i, resourses.get(item), tree, items, temp_temp_item_parent)
+	#elif not resourses.get(item) == null:
+		#temp_item.set_editable(0, true)
+		#temp_item.set_text(1, str(resourses.get(item)))
+		#temp_item.set_editable(1, true)
 
 func _manage_stories(id: int) -> void:
 	current_story_action = id as story_actions
@@ -143,11 +164,12 @@ func _manage_stories(id: int) -> void:
 			file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 			file_dialog.popup_file_dialog()
 		story_actions.SAVE_STORY:
-			await _update_story()
+			_update_story()
 			file = FileAccess.open(story_path, FileAccess.WRITE)
 			file.store_string(JSON.stringify(current_story.duplicate(true),"\t"))
+			file.close()
 		story_actions.SAVE_STORY_AS:
-			await _update_story()
+			_update_story()
 			file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 			file_dialog.popup_file_dialog()
 
@@ -177,6 +199,7 @@ func _process_file(path: String) -> void:
 				_open_story(current_story)
 				story_actions_popup.set_item_disabled(3, false)
 				story_actions_popup.set_item_disabled(4, false)
+				create_actions_popup.show()
 				return
 		story_actions.OPEN_STORY:
 			file = FileAccess.open(path, FileAccess.READ_WRITE)
@@ -189,6 +212,7 @@ func _process_file(path: String) -> void:
 			_open_story(current_story)
 			story_actions_popup.set_item_disabled(3, false)
 			story_actions_popup.set_item_disabled(4, false)
+			create_actions_popup.show()
 			return
 		story_actions.SAVE_STORY_AS:
 			file = FileAccess.open(path, FileAccess.WRITE)
@@ -205,7 +229,7 @@ func _open_story(story: Dictionary) -> void:
 	background_enum.clear()
 	sound_enum.clear()
 	character_enum.clear()
-	background_enum.clear()
+	background_type_enum.clear()
 	tempi = 0
 	for i in graph.find_children("*", "StoryNode"):
 		i.queue_free()
@@ -214,32 +238,45 @@ func _open_story(story: Dictionary) -> void:
 	nodes.clear()
 	if current_story.has("backgrounds"):
 		#_list_resourses(current_story.backgrounds, background_tree, background_items, background_enum)
+		background_edit.text = JSON.stringify(current_story.backgrounds, "\t")
 		_list_resourses_to_enum(current_story.backgrounds, background_enum)
 		for i in current_story.backgrounds:
 			if current_story.backgrounds.get(i).has("sprites"):
 				_list_resourses_to_enum_dict(current_story.backgrounds.get(i).sprites, background_type_enum, i)
 	if current_story.has("characters"):
 		#_list_resourses(current_story.characters, character_tree, character_items, character_enum)
+		character_edit.text = JSON.stringify(current_story.characters, "\t")
 		_list_resourses_to_enum(current_story.characters, character_enum)
 		for i in current_story.characters:
 			if current_story.characters.get(i).has("sprites"):
 				_list_resourses_to_enum_dict(current_story.characters.get(i).sprites, sprite_enum, i)
-		print(sprite_enum)
 	if (current_story.has("phrases")):
 		for i in current_story.phrases:
 			temp_node = node_template.instantiate()
 			graph.add_child(temp_node)
 			nodes.append(temp_node)
+			i.get_or_add("sprite", "default")
+			i.get_or_add("background", background_enum.keys()[0])
+			i.get_or_add("background_type", "default")
+			if not character_enum.has(i.name) and not character_enum.is_empty():
+				i.name = character_enum.keys()[0]
+			if not background_enum.has(i.background):
+				i.background = background_enum.keys()[0]
+			if not background_type_enum.get(i.background).has(i.background_type):
+				i.background_type = "default"
+			if not sprite_enum.get(i.name).has(i.sprite):
+				i.sprite = "default"
 			temp_node.set_node_properties(i, tempi, graph, self)
 			tempi+=1
 		for i in nodes:
 			i.set_node_connections(graph)
 
-func _update_story() -> bool:
+func _update_story() -> void:
 	current_story.phrases.clear()
+	current_story.characters = JSON.parse_string(character_edit.text)
+	current_story.backgrounds = JSON.parse_string(background_edit.text)
 	for i in nodes:
 		current_story.phrases.append(i.node_data.duplicate(true))
-	return true
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -247,6 +284,9 @@ func _input(event):
 			_manage_stories(2)
 			
 func connect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):
+	if from_port == 0:
+		nodes[int(from_node)].node_data.next = int(to_node)
+		print(nodes[int(from_node)].node_data.next)
 	graph.connect_node(from_node, from_port, to_node, to_port)
 
 func disconnect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):

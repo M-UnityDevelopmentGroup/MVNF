@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dyoghiy12jv77" path="res://Sprites/Backgrounds/spr_background.PNG" id="2_6a6wx"]
 [ext_resource type="Theme" uid="uid://bmwrgfavtwtl2" path="res://main_theme.tres" id="2_62e2m"]
 [ext_resource type="Script" uid="uid://m6207tfq7dfn" path="res://addons/mvnf/scripts/dialog.gd" id="2_qtu10"]
-[ext_resource type="JSON" path="res://story.json" id="3_ee4bf"]
 [ext_resource type="Script" uid="uid://leehmvr1x5lu" path="res://addons/AutoSizeText/ui/AutoSizeRichTextLabel.gd" id="5_fj5cn"]
+[ext_resource type="JSON" path="res://wow, arrrtemida goes write histories brrrrr.json" id="6_6a6wx"]
 [ext_resource type="PackedScene" uid="uid://cm7bx1tr6lkh4" path="res://addons/mvnf/prefabs/choice_button.tscn" id="7_iy58a"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_fj5cn"]
@@ -88,7 +88,7 @@ BackgroundImage = NodePath("../Background")
 text = NodePath("Text")
 character_name_text = NodePath("Panel/Name")
 text_speed = 0.01
-StoryJSON = ExtResource("3_ee4bf")
+StoryJSON = ExtResource("6_6a6wx")
 
 [node name="Text" type="RichTextLabel" parent="Dialog" unique_id=245291852]
 layout_mode = 1

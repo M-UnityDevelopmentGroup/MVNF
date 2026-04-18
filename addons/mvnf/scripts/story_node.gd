@@ -42,6 +42,7 @@ func _ready() -> void:
 	dragged.connect(_update_position)
 	resize_end.connect(_update_size)
 	text_edit.text_changed.connect(_update_text)
+	node_name_option.item_selected.connect(_update_name)
 	if not choice_button.pressed.is_connected(_create_choice):
 		choice_button.pressed.connect(_create_choice)
 	_change_type(0)
@@ -60,6 +61,7 @@ func _update_text() -> void:
 	
 func _update_name(index: int) -> void:
 	node_data.name = current_editor.character_enum.find_key(index)
+	set_enum(current_editor.sprite_enum.get(node_data.name), node_sprite_option, node_data.get_or_add("sprite",""))
 	
 
 func set_node_properties(phrase: Dictionary, id: int, edit: GraphEdit, editor: StoryEditor) -> bool:
@@ -84,21 +86,16 @@ func set_node_properties(phrase: Dictionary, id: int, edit: GraphEdit, editor: S
 	position_offset.y = node_data.editor_transform.position_y
 	size.x = node_data.editor_transform.size_x
 	size.y = node_data.editor_transform.size_y
-	if not current_editor.character_enum.has(node_data.name):
-		node_data.name = current_editor.character_enum.keys()[0]
-	if not current_editor.background_type_enum.get(node_data.name).sprites.has(node_data.background_type):
-		node_data.background_type = "default"
-	if not current_editor.sprite_enum.get(node_data.name).sprites.has(node_data.sprite):
-		node_data.sprite = "default"
 	set_enum(current_editor.character_enum, node_name_option, node_data.get_or_add("name",""))
 	set_enum(current_editor.background_enum, node_background_option, node_data.get_or_add("background",""))
-	set_enum(current_editor.background_type_enum.get(node_data.background_type), node_background_type_option, node_data.get_or_add("background_type",""))
-	set_enum(current_editor.sprite_enum.get(node_data.sprite), node_sprite_option, node_data.get_or_add("sprite",""))
+	set_enum(current_editor.background_type_enum.get(node_data.background), node_background_type_option, node_data.get_or_add("background_type",""))
+	set_enum(current_editor.sprite_enum.get(node_data.name), node_sprite_option, node_data.get_or_add("sprite",""))
 	#set_enum(current_editor.sound_enum, node_sound_option, node_data.get_or_add("sound",""))
 	node_text_edit.text = node_data.text
 	return true
 
 func set_enum(current_enum: Dictionary[String, int], option: OptionButton, value: String) -> void:
+	option.clear()
 	for i in current_enum:
 		option.add_item(i)
 	if not value in current_enum and not current_enum.is_empty():
@@ -111,8 +108,6 @@ func set_enum(current_enum: Dictionary[String, int], option: OptionButton, value
 		option.selected = current_enum[value]
 
 func set_node_connections(edit: GraphEdit) -> void:
-	#if not node_data.has("next") and node_data.type == "text":
-		#return
 	for i in current_editor.nodes:
 		match node_data.type:
 			"text":
@@ -123,6 +118,7 @@ func set_node_connections(edit: GraphEdit) -> void:
 				for j in node_data.choices:
 					if i.node_id == node_choices.get(j):
 						edit.connect_node(self.name, node_choices.keys().find(j), i.name, 0)
+		
 	
 func _change_type(index: int) -> void:
 	node_type = index as node_types

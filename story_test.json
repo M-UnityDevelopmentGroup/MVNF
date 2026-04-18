@@ -1,0 +1,440 @@
+{
+	"backgrounds": {
+		"default": {
+			"colors": {
+
+			},
+			"settings": {
+				"expand_mode": 0,
+				"stretch_mode": 0
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+
+			}
+		}
+	},
+	"characters": {
+		"default": {
+			"colors": {
+
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+
+			}
+		}
+	},
+	"phrases": []
+}con.svg": {
+			"colors": {
+				"main": "#0000AA"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sprites": {
+				"angry": "res://Sprites/Backgrounds/GIMPS.png",
+				"normal": "res://icon.svg"
+			}
+		}
+	},
+	"characters": {
+		"Godot": {
+			"colors": {
+				"main": "#3232FF"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg",
+				"happy": "res://iconred.svg"
+			}
+		},
+		"Unity": {
+			"colors": {
+				"main": "#FF3232"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"angry": "res://Sprites/Characters/Boris/BorisAngry.png",
+				"default": "res://Sprites/Characters/Boris/BorisNormal.png",
+				"happy": "res://Sprites/Characters/Boris/BorisShocked.png"
+			}
+		}
+	},
+	"phrases": [
+		{
+			"background": "Village",
+			"background_type": "normal",
+			"editor_transform": {
+				"position_x": 0.0,
+				"position_y": 0.0,
+				"size_x": 200.0,
+				"size_y": 500.0
+			},
+			"name": "Godot",
+			"next": 1.0,
+			"sprite": "happy",
+			"text": "AAAA",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "minecraft",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 2.0,
+			"sprite": "angry",
+			"text": "DDDD",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "normal",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"next": 3.0,
+			"sprite": "default",
+			"text": "DICT",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 4.0,
+			"sprite": "default",
+			"text": "HDD",
+			"type": "text"
+		},
+		{
+			"background": "icon.svg",
+			"background_type": "angry",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 5.0,
+			"sprite": "default",
+			"text": "12/08/2025",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"choices": {
+				"After": 7.0,
+				"Free": 8.0,
+				"Use": 6.0
+			},
+			"editor_transform": {
+				"position_x": -60,
+				"position_y": -800,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"sprite": "default",
+			"text": "12/08/2025",
+			"type": "choice"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 600,
+				"position_y": 420,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"next": 0.0,
+			"sprite": "default",
+			"text": "Start from the beginning",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 320,
+				"position_y": -980,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 5.0,
+			"sprite": "default",
+			"text": "choose again",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 480,
+				"position_y": -440,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 9.0,
+			"sprite": "default",
+			"text": "DDDD Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved.",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 1080,
+				"position_y": 60,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"sprite": "default",
+			"text": "End",
+			"type": "text"
+		}
+	]
+}{
+	"backgrounds": {
+		"Village": {
+			"colors": {
+				"main": "#AA0000"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sprites": {
+				"minecraft": "res://Sprites/Backgrounds/default.jpg",
+				"normal": "res://Sprites/Backgrounds/spr_background.PNG"
+			}
+		},
+		"icon.svg": {
+			"colors": {
+				"main": "#0000AA"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sprites": {
+				"angry": "res://Sprites/Backgrounds/GIMPS.png",
+				"normal": "res://icon.svg"
+			}
+		}
+	},
+	"characters": {
+		"Godot": {
+			"colors": {
+				"main": "#3232FF"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg",
+				"happy": "res://iconred.svg"
+			}
+		},
+		"Unity": {
+			"colors": {
+				"main": "#FF3232"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"angry": "res://Sprites/Characters/Boris/BorisAngry.png",
+				"default": "res://Sprites/Characters/Boris/BorisNormal.png",
+				"happy": "res://Sprites/Characters/Boris/BorisShocked.png"
+			}
+		}
+	},
+	"phrases": [
+		{
+			"background": "Village",
+			"background_type": "normal",
+			"editor_transform": {
+				"position_x": 0.0,
+				"position_y": 0.0,
+				"size_x": 200.0,
+				"size_y": 500.0
+			},
+			"name": "Godot",
+			"next": 1.0,
+			"sprite": "happy",
+			"text": "AAAA",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "minecraft",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 2.0,
+			"sprite": "angry",
+			"text": "DDDD",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "normal",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"next": 3.0,
+			"sprite": "default",
+			"text": "DICT",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 4.0,
+			"sprite": "default",
+			"text": "HDD",
+			"type": "text"
+		},
+		{
+			"background": "icon.svg",
+			"background_type": "angry",
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 5.0,
+			"sprite": "default",
+			"text": "12/08/2025",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"choices": {
+				"After": 7.0,
+				"Free": 8.0,
+				"Use": 6.0
+			},
+			"editor_transform": {
+				"position_x": -60,
+				"position_y": -800,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"sprite": "default",
+			"text": "12/08/2025",
+			"type": "choice"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 600,
+				"position_y": 420,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"next": 0.0,
+			"sprite": "default",
+			"text": "Start from the beginning",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 320,
+				"position_y": -980,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 5.0,
+			"sprite": "default",
+			"text": "choose again",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 480,
+				"position_y": -440,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Unity",
+			"next": 9.0,
+			"sprite": "default",
+			"text": "DDDD Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved. Copyright (c) 2025 Author. All Rights Reserved.",
+			"type": "text"
+		},
+		{
+			"background": "Village",
+			"background_type": "default",
+			"editor_transform": {
+				"position_x": 1080,
+				"position_y": 60,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "Godot",
+			"sprite": "default",
+			"text": "End",
+			"type": "text"
+		}
+	]
+}

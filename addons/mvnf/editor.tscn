@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dof7ka1a7mg07" path="res://addons/mvnf/scripts/editor.gd" id="1_orbl0"]
 [ext_resource type="PackedScene" uid="uid://d1tybt50k68aq" path="res://addons/mvnf/prefabs/graph_node.tscn" id="2_7guw3"]
 
-[node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree", "background_tree", "graph", "story_path_label", "story_actions_popup")]
+[node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree", "background_tree", "character_edit", "background_edit", "graph", "story_path_label", "story_actions_popup", "create_actions_popup", "file_dialog")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,10 +14,18 @@ grow_vertical = 2
 script = ExtResource("1_orbl0")
 character_tree = NodePath("HSplitContainer/TabContainer/Characters/VBoxContainer/Tree")
 background_tree = NodePath("HSplitContainer/TabContainer/Backgrounds/VBoxContainer/Tree")
+character_edit = NodePath("HSplitContainer/TabContainer/Characters/VBoxContainer/CodeEdit")
+background_edit = NodePath("HSplitContainer/TabContainer/Backgrounds/VBoxContainer/CodeEdit")
 graph = NodePath("HSplitContainer/GraphEdit")
 story_path_label = NodePath("Panel/HBoxContainer/Label")
 node_template = ExtResource("2_7guw3")
 story_actions_popup = NodePath("Panel/HBoxContainer/MenuBar/StoryActions")
+create_actions_popup = NodePath("Panel/HBoxContainer/Create")
+file_dialog = NodePath("FileDialog")
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=852280624]
+display_mode = 1
+filters = PackedStringArray("*.json;JSON")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=879801920]
 layout_mode = 1
@@ -62,10 +70,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Tree" type="Tree" parent="HSplitContainer/TabContainer/Characters/VBoxContainer" unique_id=2060893578]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 hide_root = true
+
+[node name="CodeEdit" type="CodeEdit" parent="HSplitContainer/TabContainer/Characters/VBoxContainer" unique_id=1474744673]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Backgrounds" type="Panel" parent="HSplitContainer/TabContainer" unique_id=1551690562]
 visible = false
@@ -81,10 +94,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Tree" type="Tree" parent="HSplitContainer/TabContainer/Backgrounds/VBoxContainer" unique_id=1910603532]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 columns = 2
 hide_root = true
+
+[node name="CodeEdit" type="CodeEdit" parent="HSplitContainer/TabContainer/Backgrounds/VBoxContainer" unique_id=1261957432]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="." unique_id=513760714]
 layout_mode = 1
@@ -135,11 +153,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 selection_enabled = true
 
-[node name="MenuBar2" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1617308216]
+[node name="Create" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1617308216]
+visible = false
 layout_mode = 2
 flat = true
 
-[node name="PopupMenu" type="PopupMenu" parent="Panel/HBoxContainer/MenuBar2" unique_id=1749874465]
+[node name="PopupMenu" type="PopupMenu" parent="Panel/HBoxContainer/Create" unique_id=1749874465]
 oversampling_override = 1.0
 title = "Create..."
 size = Vector2i(133, 100)
@@ -148,8 +167,10 @@ item_0/text = "Node"
 item_0/id = 0
 item_1/text = "Character"
 item_1/id = 1
+item_1/disabled = true
 item_2/text = "Background"
 item_2/id = 2
+item_2/disabled = true
 
 [connection signal="id_pressed" from="Panel/HBoxContainer/MenuBar/StoryActions" to="." method="_manage_stories"]
-[connection signal="id_pressed" from="Panel/HBoxContainer/MenuBar2/PopupMenu" to="." method="_manage_nodes"]
+[connection signal="id_pressed" from="Panel/HBoxContainer/Create/PopupMenu" to="." method="_manage_nodes"]
