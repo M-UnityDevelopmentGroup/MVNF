@@ -271,6 +271,7 @@ func _open_story(story: Dictionary) -> void:
 		for i in nodes:
 			i.set_node_connections(graph)
 
+
 func _update_story() -> void:
 	current_story.phrases.clear()
 	current_story.characters = JSON.parse_string(character_edit.text)
@@ -284,9 +285,12 @@ func _input(event):
 			_manage_stories(2)
 			
 func connect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):
-	if from_port == 0:
+	if nodes[int(from_node)].node_data.type == "text":
 		nodes[int(from_node)].node_data.next = int(to_node)
 		print(nodes[int(from_node)].node_data.next)
+	else:
+		print(nodes[int(from_node)].node_data.choices.keys()[from_port])
+		nodes[int(from_node)].node_data.choices.set(nodes[int(from_node)].node_data.choices.keys()[from_port], int(to_node))
 	graph.connect_node(from_node, from_port, to_node, to_port)
 
 func disconnect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):

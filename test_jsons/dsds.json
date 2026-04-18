@@ -1,0 +1,104 @@
+{
+	"backgrounds": {
+		"default": {
+			"colors": {
+				"main": "6464FF"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg"
+			}
+		}
+	},
+	"characters": {
+		"default": {
+			"colors": {
+				"main": "6464FF"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg"
+			}
+		}
+	},
+	"phrases": [
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"next": 1,
+			"sprite": "default",
+			"text": "Why",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+				"Because": 3,
+				"D": 2
+			},
+			"editor_transform": {
+				"position_x": 500.0,
+				"position_y": 0.0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"sprite": "default",
+			"text": "",
+			"type": "choice"
+		},
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 1060.0,
+				"position_y": 360.0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"sprite": "default",
+			"text": "asd",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 1320.0,
+				"position_y": -500.0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"sprite": "default",
+			"text": "aa",
+			"type": "text"
+		}
+	]
+}

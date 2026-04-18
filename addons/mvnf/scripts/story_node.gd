@@ -26,7 +26,6 @@ var current_editor: StoryEditor
 var current_graph_edit: GraphEdit
 var node_id: int
 var node_type: node_types
-var node_choices: Dictionary[String, int]
 var node_data: Dictionary
 var choice_templates: Array[Choice]
 var temp_text_edit_size: float
@@ -116,8 +115,8 @@ func set_node_connections(edit: GraphEdit) -> void:
 					return
 			"choice":
 				for j in node_data.choices:
-					if i.node_id == node_choices.get(j):
-						edit.connect_node(self.name, node_choices.keys().find(j), i.name, 0)
+					if i.node_id == node_data.choices.get(j):
+						edit.connect_node(self.name, node_data.choices.keys().find(j), i.name, 0)
 		
 	
 func _change_type(index: int) -> void:
@@ -125,6 +124,7 @@ func _change_type(index: int) -> void:
 	match node_type:
 		node_types.text:
 			text_label.text = "text"
+			node_data.type = "text"
 			text_edit_label.show()
 			size.y += text_edit_label.size.y
 			choice_label.hide()
@@ -135,6 +135,7 @@ func _change_type(index: int) -> void:
 		node_types.choice:
 			text_label.text = ""
 			temp_text_edit_size = text_edit_label.size.y
+			node_data.type = "choice"
 			text_edit_label.hide()
 			size.y -= temp_text_edit_size
 			choice_label.show()
@@ -143,21 +144,23 @@ func _change_type(index: int) -> void:
 				size.y += type_button.size.y
 			set_slot_enabled_right(choice_slot_offset, false)
 	
-func _create_choice(text: String = "Choice", path: int = -1) -> void:
-	if node_choices.has(text):
-		text += str(node_choices.size())
-	node_choices.set(text,path)
+func _create_choice(text: String = "Choice", path: int = 0) -> void:
+	if node_data.choices.has(text):
+		text += str(node_data.choices.size())
+	node_data.choices.set(text,path)
 	temp_choice = choice_template.instantiate()
 	temp_choice.choice_edit.text = text
+	temp_choice.temp_name = text
+	temp_choice.node = self
 	temp_choice.remove_button.pressed.connect(_remove_choice.bind(temp_choice))
 	choice_templates.append(temp_choice)
 	size.y += temp_choice_size_y
 	add_child(temp_choice)
-	set_slot_enabled_right(node_choices.size()+choice_slot_offset, true)
+	set_slot_enabled_right(node_data.choices.size()+choice_slot_offset, true)
 
 func _remove_choice(choice: Choice) -> void:
 	size.y -= temp_choice_size_y
-	node_choices.erase(choice.choice_edit.text)
+	node_data.choices.erase(choice.choice_edit.text)
 	choice.queue_free()
 	choice_templates.erase(choice)
 

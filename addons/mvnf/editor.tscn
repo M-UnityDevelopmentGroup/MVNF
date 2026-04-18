@@ -24,6 +24,8 @@ create_actions_popup = NodePath("Panel/HBoxContainer/Create")
 file_dialog = NodePath("FileDialog")
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=852280624]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
 display_mode = 1
 filters = PackedStringArray("*.json;JSON")
 

@@ -1,5 +1,20 @@
 {
 	"backgrounds": {
+		"GameDev Station": {
+			"colors": {
+				"main": "6464FF"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg"
+			}
+		},
 		"default": {
 			"colors": {
 				"main": "6464FF"
@@ -45,19 +60,20 @@
 			"background": "default",
 			"background_type": "default",
 			"choices": {
-
+				"noooooo": 4,
+				"yesssss": 1
 			},
 			"editor_transform": {
-				"position_x": 120.0,
-				"position_y": 80.0,
-				"size_x": 300,
-				"size_y": 500
+				"position_x": 160.0,
+				"position_y": 60.0,
+				"size_x": 300.0,
+				"size_y": 500.0
 			},
-			"name": "default",
-			"next": 1,
+			"name": "Arrrtemida",
+			"next": 1.0,
 			"sprite": "default",
 			"text": "Вау, ого, это что, правда работает?",
-			"type": "text"
+			"type": "choice"
 		},
 		{
 			"background": "default",
@@ -68,11 +84,11 @@
 			"editor_transform": {
 				"position_x": 560.0,
 				"position_y": 120.0,
-				"size_x": 300,
-				"size_y": 500
+				"size_x": 300.0,
+				"size_y": 500.0
 			},
 			"name": "default",
-			"next": 2,
+			"next": 2.0,
 			"sprite": "default",
 			"text": "Наверно дааааа",
 			"type": "text"
@@ -86,11 +102,11 @@
 			"editor_transform": {
 				"position_x": 960.0,
 				"position_y": 120.0,
-				"size_x": 300,
-				"size_y": 500
+				"size_x": 300.0,
+				"size_y": 500.0
 			},
 			"name": "default",
-			"next": 3,
+			"next": 3.0,
 			"sprite": "default",
 			"text": "Круто?",
 			"type": "text"
@@ -104,12 +120,47 @@
 			"editor_transform": {
 				"position_x": 1300.0,
 				"position_y": 120.0,
+				"size_x": 300.0,
+				"size_y": 500.0
+			},
+			"name": "default",
+			"sprite": "default",
+			"text": "Круто",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 560.0,
+				"position_y": 640.0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"next": 5,
+			"sprite": "default",
+			"text": "блин, нет, не работает ((((",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 960.0,
+				"position_y": 640.0,
 				"size_x": 300,
 				"size_y": 500
 			},
 			"name": "default",
 			"sprite": "default",
-			"text": "Круто",
+			"text": "",
 			"type": "text"
 		}
 	]
