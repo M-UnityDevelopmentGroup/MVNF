@@ -125,6 +125,7 @@ grow_vertical = 2
 [node name="MenuBar" type="MenuBar" parent="Panel/HBoxContainer" unique_id=1114572388]
 layout_mode = 2
 flat = true
+prefer_global_menu = false
 
 [node name="StoryActions" type="PopupMenu" parent="Panel/HBoxContainer/MenuBar" unique_id=734710699]
 oversampling_override = 1.0
@@ -159,6 +160,7 @@ selection_enabled = true
 visible = false
 layout_mode = 2
 flat = true
+prefer_global_menu = false
 
 [node name="PopupMenu" type="PopupMenu" parent="Panel/HBoxContainer/Create" unique_id=1749874465]
 oversampling_override = 1.0

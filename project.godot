@@ -32,4 +32,4 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
+enabled=PackedStringArray("res://addons/mvnf/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
