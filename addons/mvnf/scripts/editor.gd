@@ -196,7 +196,7 @@ func _process_file(path: String) -> void:
 				story_path = path
 				story_path_label.text = story_path
 				file.close()
-				_open_story(current_story)
+				_open_story()
 				story_actions_popup.set_item_disabled(3, false)
 				story_actions_popup.set_item_disabled(4, false)
 				create_actions_popup.show()
@@ -205,11 +205,11 @@ func _process_file(path: String) -> void:
 			file = FileAccess.open(path, FileAccess.READ_WRITE)
 			if JSON.parse_string(file.get_as_text()) == null:
 				file.store_string(JSON.stringify(story_template,"\t"))
-			current_story = JSON.parse_string(file.get_as_text())
+			current_story = JSON.parse_string(file.get_as_text()).duplicate(true)
+			file.close()
 			story_path = path
 			story_path_label.text = story_path
-			file.close()
-			_open_story(current_story)
+			_open_story()
 			story_actions_popup.set_item_disabled(3, false)
 			story_actions_popup.set_item_disabled(4, false)
 			create_actions_popup.show()
@@ -222,8 +222,7 @@ func _process_file(path: String) -> void:
 			story_path_label.text = story_path
 			return
 
-func _open_story(story: Dictionary) -> void:
-	current_story = story.duplicate(true)
+func _open_story() -> void:
 	graph.clear_connections()
 	sprite_enum.clear()
 	background_enum.clear()
