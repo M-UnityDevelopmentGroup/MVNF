@@ -1,0 +1,69 @@
+{
+	"backgrounds": {
+		"default": {
+			"colors": {
+				"main": "6464FF"
+			},
+			"settings": {
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg"
+			}
+		}
+	},
+	"characters": {
+		"default": {
+			"colors": {
+				"main": "6464FF"
+			},
+			"sounds": {
+
+			},
+			"sprites": {
+				"default": "res://icon.svg"
+			}
+		}
+	},
+	"phrases": [
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 100.0,
+				"position_y": 60.0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"next": 1,
+			"sprite": "default",
+			"text": "",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 560.0,
+				"position_y": -60.0,
+				"size_x": 300,
+				"size_y": 500
+			},
+			"name": "default",
+			"sprite": "default",
+			"text": "",
+			"type": "text"
+		}
+	]
+}

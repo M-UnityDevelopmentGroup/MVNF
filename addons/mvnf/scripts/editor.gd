@@ -10,6 +10,8 @@ class_name StoryEditor
 @export var node_template: PackedScene
 @export var story_actions_popup: PopupMenu
 @export var create_actions_popup: MenuBar
+@export var character_button: Button
+@export var background_button: Button
 @export var file_dialog: FileDialog
 var current_story: Dictionary
 var character_items: Dictionary[String,Array]
@@ -22,13 +24,11 @@ var sound_enum: Dictionary[String, Dictionary]
 var temp_node: StoryNode
 var temp_node_data: Dictionary
 var nodes: Array[StoryNode]
-#var temp_item: TreeItem
-#var temp_item_parent: TreeItem
-#var temp_temp_item_parent: TreeItem
 var temp_array: Array[TreeItem]
 var temp_enum: Dictionary[String, int]
 var tempi: int
 var file: FileAccess
+var file_content: String
 var story_path: String
 var current_story_action: story_actions
 var story_template: Dictionary = {
@@ -117,6 +117,8 @@ func _ready() -> void:
 	if not graph.disconnection_request.is_connected(disconnect_nodes):
 		graph.disconnection_request.connect(disconnect_nodes)
 	file_dialog.file_selected.connect(_process_file)
+	character_button.pressed.connect(_update_characters)
+	background_button.pressed.connect(_update_backgrounds)
 	
 func _list_resourses_to_enum(resourses: Dictionary, enums: Dictionary[String, int]):
 	for i in resourses:
@@ -128,32 +130,6 @@ func _list_resourses_to_enum_dict(resourses: Dictionary, enums: Dictionary[Strin
 		temp_enum.get_or_add(i, len(temp_enum))
 	enums.get_or_add(key,temp_enum.duplicate(true))
 	
-#func _list_resourses(resourses: Dictionary, tree: Tree, items: Dictionary[String,Array], enums: Dictionary[String, int]):
-	#tree.clear()
-	#tree.set_column_custom_minimum_width(0, 200)
-	#tree.set_column_expand(0,false)
-	#temp_item_parent = tree.create_item()
-	#for i in resourses:
-		#enums.get_or_add(i, len(enums))
-		#_list_item(i, resourses, tree, items.get_or_add(i, items.get_or_add(i, temp_array)))
-		#temp_item_parent = tree.get_root()
-
-#func _list_item(item: Variant, resourses: Dictionary, tree: Tree, items: Array[TreeItem], parent: TreeItem = null) -> void:
-	#temp_item = tree.create_item(temp_item_parent if parent == null else parent)
-	#temp_item.set_text(0, item)
-	#items.append(temp_item)
-	#if parent == null:
-		#temp_item_parent = temp_item
-	#if typeof(resourses.get(item)) == TYPE_DICTIONARY:
-		#temp_item.add_button(1, get_theme_icon("Add", "EditorIcons"))
-		#temp_temp_item_parent = temp_item
-		#for i in resourses.get(item):
-			#_list_item(i, resourses.get(item), tree, items, temp_temp_item_parent)
-	#elif not resourses.get(item) == null:
-		#temp_item.set_editable(0, true)
-		#temp_item.set_text(1, str(resourses.get(item)))
-		#temp_item.set_editable(1, true)
-
 func _manage_stories(id: int) -> void:
 	current_story_action = id as story_actions
 	match id as story_actions:
@@ -186,6 +162,7 @@ func _manage_nodes(id: int) ->  void:
 
 func _process_file(path: String) -> void:
 	if not path.get_extension() == "json":
+		push_error("Story is invalid")
 		return
 	match current_story_action:
 		story_actions.NEW_STORY:
@@ -202,11 +179,14 @@ func _process_file(path: String) -> void:
 				create_actions_popup.show()
 				return
 		story_actions.OPEN_STORY:
-			file = FileAccess.open(path, FileAccess.READ_WRITE)
-			if JSON.parse_string(file.get_as_text()) == null:
-				file.store_string(JSON.stringify(story_template,"\t"))
-			current_story = JSON.parse_string(file.get_as_text()).duplicate(true)
+			file = FileAccess.open(path, FileAccess.READ)
+			file_content = file.get_as_text()
+			if JSON.parse_string(file_content) == null:
+				push_error("Story is invalid")
+				file.close()
+				return
 			file.close()
+			current_story = JSON.parse_string(file_content)
 			story_path = path
 			story_path_label.text = story_path
 			_open_story()
@@ -224,31 +204,21 @@ func _process_file(path: String) -> void:
 
 func _open_story() -> void:
 	graph.clear_connections()
-	sprite_enum.clear()
-	background_enum.clear()
+	#sprite_enum.clear()
+	#background_enum.clear()
 	sound_enum.clear()
-	character_enum.clear()
-	background_type_enum.clear()
+	#character_enum.clear()
+	#background_type_enum.clear()
 	tempi = 0
-	for i in graph.find_children("*", "StoryNode"):
-		i.queue_free()
 	for i in nodes:
 		i.queue_free()
 	nodes.clear()
 	if current_story.has("backgrounds"):
-		#_list_resourses(current_story.backgrounds, background_tree, background_items, background_enum)
 		background_edit.text = JSON.stringify(current_story.backgrounds, "\t")
-		_list_resourses_to_enum(current_story.backgrounds, background_enum)
-		for i in current_story.backgrounds:
-			if current_story.backgrounds.get(i).has("sprites"):
-				_list_resourses_to_enum_dict(current_story.backgrounds.get(i).sprites, background_type_enum, i)
+		_update_enums(current_story.backgrounds, background_enum, "sprites", background_type_enum)
 	if current_story.has("characters"):
-		#_list_resourses(current_story.characters, character_tree, character_items, character_enum)
 		character_edit.text = JSON.stringify(current_story.characters, "\t")
-		_list_resourses_to_enum(current_story.characters, character_enum)
-		for i in current_story.characters:
-			if current_story.characters.get(i).has("sprites"):
-				_list_resourses_to_enum_dict(current_story.characters.get(i).sprites, sprite_enum, i)
+		_update_enums(current_story.characters, character_enum, "sprites", sprite_enum)
 	if (current_story.has("phrases")):
 		for i in current_story.phrases:
 			temp_node = node_template.instantiate()
@@ -270,13 +240,50 @@ func _open_story() -> void:
 		for i in nodes:
 			i.set_node_connections(graph)
 
+func _update_enums(first_dict: Dictionary, first_enum: Dictionary, key: String, second_enum: Dictionary) -> void:
+	first_enum.clear()
+	second_enum.clear()
+	_list_resourses_to_enum(first_dict, first_enum)
+	for i in first_dict:
+		if first_dict.get(i).has(key):
+			_list_resourses_to_enum_dict(first_dict.get(i).get(key), second_enum, i)
 
 func _update_story() -> void:
+	if JSON.parse_string(character_edit.text) == null or JSON.parse_string(background_edit.text) == null:
+		return
 	current_story.phrases.clear()
 	current_story.characters = JSON.parse_string(character_edit.text)
 	current_story.backgrounds = JSON.parse_string(background_edit.text)
+	_update_enums(current_story.backgrounds, background_enum, "sprites", background_type_enum)
+	_update_enums(current_story.characters, character_enum, "sprites", sprite_enum)
 	for i in nodes:
+		i._update_name_enum()
+		i._update_background_enum()
+		i._update_background()
+		i._update_name()
 		current_story.phrases.append(i.node_data.duplicate(true))
+
+func _update_characters() -> void:
+	if JSON.parse_string(character_edit.text) == null:
+		character_button.modulate = Color(1,0,0)
+		return
+	character_button.modulate = Color(1,1,1)
+	current_story.characters = JSON.parse_string(character_edit.text)
+	_update_enums(current_story.characters, character_enum, "sprites", sprite_enum)
+	for i in nodes:
+		i._update_name()
+		i._update_name_enum()
+
+func _update_backgrounds() -> void:
+	if JSON.parse_string(background_edit.text) == null:
+		background_button.modulate = Color(1,0,0)
+		return
+	background_button.modulate = Color(1,1,1)
+	current_story.backgrounds = JSON.parse_string(background_edit.text)
+	_update_enums(current_story.backgrounds, background_enum, "sprites", background_type_enum)
+	for i in nodes:
+		i._update_background()
+		i._update_background_enum()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -286,11 +293,13 @@ func _input(event):
 func connect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):
 	if nodes[int(from_node)].node_data.type == "text":
 		nodes[int(from_node)].node_data.next = int(to_node)
-		print(nodes[int(from_node)].node_data.next)
 	else:
-		print(nodes[int(from_node)].node_data.choices.keys()[from_port])
 		nodes[int(from_node)].node_data.choices.set(nodes[int(from_node)].node_data.choices.keys()[from_port], int(to_node))
 	graph.connect_node(from_node, from_port, to_node, to_port)
 
 func disconnect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):
+	if nodes[int(from_node)].node_data.type == "text":
+		nodes[int(from_node)].node_data.erase("next")
+	else:
+		nodes[int(from_node)].node_data.choices.set(nodes[int(from_node)].node_data.choices.keys()[from_port], 0)
 	graph.disconnect_node(from_node, from_port, to_node, to_port)
