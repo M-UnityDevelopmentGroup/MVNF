@@ -75,7 +75,6 @@ func handle_phrase() -> bool:
 		LabelPanel.self_modulate = StoryJSON.data.characters.get(phrase.name).colors.main
 		if StoryJSON.data.characters.get(phrase.name).sounds.has(phrase.sound):
 			foreground_stream.stream = load(StoryJSON.data.characters.get(phrase.name).sounds.get(phrase.sound))
-			
 	phrase.get_or_add("background", "default")
 	phrase.get_or_add("background_sound", "default")
 	if StoryJSON.data.backgrounds.has(phrase.background):
@@ -92,8 +91,6 @@ func handle_phrase() -> bool:
 	if phrase.has("font_size"):
 		for font_type in font_types:
 			text.add_theme_font_size_override(font_type, phrase.font_size)
-	else: 
-		text.do_resize_text()
 	is_busy = true
 	while not text.visible_characters >= len(phrase.text):
 		text.visible_characters += 1

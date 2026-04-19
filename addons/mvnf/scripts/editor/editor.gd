@@ -293,10 +293,10 @@ func _update_backgrounds() -> void:
 		i._update_background()
 		i._update_background_enum()
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_S and event.ctrl_pressed and not story_path == null and not current_story.is_empty():
-			_manage_stories(2)
+#func _input(event):
+	#if event is InputEventKey and event.pressed:
+		#if event.keycode == KEY_S and event.ctrl_pressed and not story_path == null and not current_story.is_empty():
+			#_manage_stories(2)
 			
 func connect_nodes(from_node: StringName, from_port: int, to_node: StringName, to_port: int):
 	if nodes[int(from_node)].node_data.type == "text":

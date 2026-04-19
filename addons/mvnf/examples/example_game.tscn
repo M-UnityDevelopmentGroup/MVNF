@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://m6207tfq7dfn" path="res://addons/mvnf/scripts/dialog.gd" id="3_gefd4"]
 [ext_resource type="PackedScene" uid="uid://cm7bx1tr6lkh4" path="res://addons/mvnf/prefabs/choice_button.tscn" id="4_ckhy2"]
 [ext_resource type="JSON" path="res://addons/mvnf/examples/example.json" id="4_eu40k"]
-[ext_resource type="Script" uid="uid://leehmvr1x5lu" path="res://addons/AutoSizeText/ui/AutoSizeRichTextLabel.gd" id="6_88rh6"]
 
 [sub_resource type="Theme" id="Theme_nnqer"]
 
@@ -100,15 +99,8 @@ offset_right = -34.0
 offset_bottom = -76.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 115
-theme_override_font_sizes/bold_font_size = 115
-theme_override_font_sizes/bold_italics_font_size = 115
-theme_override_font_sizes/italics_font_size = 115
-theme_override_font_sizes/mono_font_size = 115
 bbcode_enabled = true
 text = "dddddddddddddddd"
-script = ExtResource("6_88rh6")
-max_font_size = 256
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialog" unique_id=142887456]
 layout_mode = 1
@@ -202,5 +194,7 @@ mouse_filter = 2
 alignment = 1
 
 [node name="Foreground" type="AudioStreamPlayer" parent="." unique_id=1866255598]
+volume_db = -4.0
 
 [node name="Background" type="AudioStreamPlayer" parent="Foreground" unique_id=508687329]
+volume_db = -16.0

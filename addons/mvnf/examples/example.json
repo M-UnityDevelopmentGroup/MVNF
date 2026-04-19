@@ -5,8 +5,8 @@
 				"main": "6464FF"
 			},
 			"settings": {
-				"expand_mode": 0,
-				"stretch_mode": 0
+				"expand_mode": 0.0,
+				"stretch_mode": 0.0
 			},
 			"sounds": {
 				"default": "res://addons/mvnf/sounds/fallback/default.mp3"
@@ -29,5 +29,105 @@
 			}
 		}
 	},
-	"phrases": []
+	"phrases": [
+		{
+			"background": "default",
+			"background_sound": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 0,
+				"position_y": 0,
+				"size_x": 360.0,
+				"size_y": 779.999938964844
+			},
+			"name": "default",
+			"next": 1,
+			"sound": "default",
+			"sprite": "default",
+			"text": "This is an example story",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_sound": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 680.0,
+				"position_y": 0.0,
+				"size_x": 400.0,
+				"size_y": 839.999938964844
+			},
+			"name": "default",
+			"next": 2,
+			"sound": "default",
+			"sprite": "default",
+			"text": "You can choose something",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_sound": "default",
+			"background_type": "default",
+			"choices": {
+				"Choice": 1,
+				"Different": 4,
+				"Something": 3
+			},
+			"editor_transform": {
+				"position_x": 1240.0,
+				"position_y": 40.0,
+				"size_x": 520.0,
+				"size_y": 620.0
+			},
+			"name": "default",
+			"sound": "default",
+			"sprite": "default",
+			"text": "",
+			"type": "choice"
+		},
+		{
+			"background": "default",
+			"background_sound": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 2060.0,
+				"position_y": -680.0,
+				"size_x": 440.000122070312,
+				"size_y": 720.0
+			},
+			"name": "default",
+			"sound": "default",
+			"sprite": "default",
+			"text": "Something",
+			"type": "text"
+		},
+		{
+			"background": "default",
+			"background_sound": "default",
+			"background_type": "default",
+			"choices": {
+
+			},
+			"editor_transform": {
+				"position_x": 2080.0,
+				"position_y": 220.0,
+				"size_x": 540.0,
+				"size_y": 760.0
+			},
+			"name": "default",
+			"sound": "default",
+			"sprite": "default",
+			"text": "Nothing",
+			"type": "text"
+		}
+	]
 }
