@@ -16,7 +16,10 @@ signal proceed(type: String)
 @export var text: RichTextLabel
 @export var character_name_text: RichTextLabel
 @export var text_speed := 0.1
+@export var background_stream: AudioStreamPlayer
+@export var foreground_stream: AudioStreamPlayer
 @export var StoryJSON: JSON
+var current_stream: AudioStream
 var current_text_speed: float 
 var current_phrases: Array[Dictionary]
 var current_index: int
@@ -66,15 +69,25 @@ func handle_phrase() -> bool:
 	character_name_text.text = phrase.name
 	text.visible_characters = 0
 	phrase.get_or_add("sprite", "default")
+	phrase.get_or_add("sound", "default")
 	if StoryJSON.data.characters.has(phrase.name):
 		DialogImage.texture = load(StoryJSON.data.characters.get(phrase.name).sprites.get(phrase.sprite))
 		LabelPanel.self_modulate = StoryJSON.data.characters.get(phrase.name).colors.main
+		if StoryJSON.data.characters.get(phrase.name).sounds.has(phrase.sound):
+			foreground_stream.stream = load(StoryJSON.data.characters.get(phrase.name).sounds.get(phrase.sound))
+			
 	phrase.get_or_add("background", "default")
+	phrase.get_or_add("background_sound", "default")
 	if StoryJSON.data.backgrounds.has(phrase.background):
 		BackgroundImage.texture = load(StoryJSON.data.backgrounds.get(phrase.background).sprites.get(phrase.background_type))
 		BackgroundImage.expand_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.expand_mode
 		BackgroundImage.stretch_mode = StoryJSON.data.backgrounds.get(phrase.background).settings.stretch_mode
 		self_modulate = StoryJSON.data.backgrounds.get(phrase.background).colors.main
+		if StoryJSON.data.backgrounds.get(phrase.background).sounds.has(phrase.background_sound):
+			current_stream = load(StoryJSON.data.backgrounds.get(phrase.background).sounds.get(phrase.background_sound))
+			if not background_stream.stream == current_stream:
+				background_stream.stream = current_stream
+				background_stream.play()
 	text.text = phrase.text
 	if phrase.has("font_size"):
 		for font_type in font_types:
@@ -84,6 +97,7 @@ func handle_phrase() -> bool:
 	is_busy = true
 	while not text.visible_characters >= len(phrase.text):
 		text.visible_characters += 1
+		foreground_stream.play()
 		if is_busy:
 			await get_tree().create_timer(current_text_speed).timeout
 		else:

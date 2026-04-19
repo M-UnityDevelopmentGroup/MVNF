@@ -15,9 +15,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="M-Unity Visual Novel Framework (MVNF)"
-run/main_scene="res://control.tscn"
+run/main_scene="res://addons/mvnf/examples/example_game.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout=""
 
 [debug]
 

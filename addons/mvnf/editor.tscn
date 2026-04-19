@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://bx465n27xufqf"]
 
-[ext_resource type="Theme" uid="uid://bmwrgfavtwtl2" path="res://main_theme.tres" id="1_2k1fq"]
-[ext_resource type="Script" uid="uid://dof7ka1a7mg07" path="res://addons/mvnf/scripts/editor.gd" id="1_orbl0"]
+[ext_resource type="Script" uid="uid://dof7ka1a7mg07" path="res://addons/mvnf/scripts/editor/editor.gd" id="1_orbl0"]
 [ext_resource type="PackedScene" uid="uid://d1tybt50k68aq" path="res://addons/mvnf/prefabs/graph_node.tscn" id="2_7guw3"]
+
+[sub_resource type="Theme" id="Theme_orbl0"]
 
 [node name="Control" type="Control" unique_id=499951051 node_paths=PackedStringArray("character_tree", "background_tree", "character_edit", "background_edit", "graph", "story_path_label", "story_actions_popup", "create_actions_popup", "character_button", "background_button", "file_dialog")]
 layout_mode = 3
@@ -45,7 +46,6 @@ split_offset = -161
 [node name="GraphEdit" type="GraphEdit" parent="HSplitContainer" unique_id=50568832]
 layout_mode = 2
 size_flags_horizontal = 3
-scroll_offset = Vector2(-77, 0)
 grid_pattern = 1
 right_disconnects = true
 connection_lines_curvature = 0.25
@@ -59,12 +59,11 @@ show_minimap_button = false
 [node name="TabContainer" type="TabContainer" parent="HSplitContainer" unique_id=609807139]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
-current_tab = 1
+current_tab = 0
 
 [node name="Characters" type="Panel" parent="HSplitContainer/TabContainer" unique_id=1423368008]
-visible = false
 layout_mode = 2
-theme = ExtResource("1_2k1fq")
+theme = SubResource("Theme_orbl0")
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/TabContainer/Characters" unique_id=1087700646]
@@ -91,6 +90,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Backgrounds" type="Panel" parent="HSplitContainer/TabContainer" unique_id=1551690562]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

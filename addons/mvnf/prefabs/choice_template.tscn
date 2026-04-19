@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cps2n2dhjxfhp"]
 
-[ext_resource type="Script" uid="uid://btbawstrtvolp" path="res://addons/mvnf/scripts/choice.gd" id="1_e2xqn"]
+[ext_resource type="Script" uid="uid://btbawstrtvolp" path="res://addons/mvnf/scripts/editor/choice.gd" id="1_e2xqn"]
 
 [node name="choice" type="HBoxContainer" unique_id=1242550911 node_paths=PackedStringArray("remove_button", "choice_edit")]
 offset_right = 86.0

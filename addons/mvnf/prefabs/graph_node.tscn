@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://d1tybt50k68aq"]
 
-[ext_resource type="Script" uid="uid://b8gke6y07aytw" path="res://addons/mvnf/scripts/story_node.gd" id="1_7nebk"]
+[ext_resource type="Script" uid="uid://b8gke6y07aytw" path="res://addons/mvnf/scripts/editor/story_node.gd" id="1_7nebk"]
 [ext_resource type="PackedScene" uid="uid://cps2n2dhjxfhp" path="res://addons/mvnf/prefabs/choice_template.tscn" id="2_cewil"]
 
-[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "node_sprite_option", "node_sound_option", "node_background_option", "node_background_type_option", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
+[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "node_sprite_option", "node_character_sound_option", "node_background_option", "node_background_type_option", "node_background_sound_option", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
 custom_minimum_size = Vector2(300, 500)
 offset_right = 300.0
-offset_bottom = 615.0
+offset_bottom = 661.0
 mouse_filter = 1
 resizable = true
 ignore_invalid_connection_type = true
@@ -131,7 +131,7 @@ slot/13/left_enabled = false
 slot/13/left_type = 0
 slot/13/left_color = Color(1, 1, 1, 1)
 slot/13/left_icon = null
-slot/13/right_enabled = true
+slot/13/right_enabled = false
 slot/13/right_type = 1
 slot/13/right_color = Color(1, 1, 1, 1)
 slot/13/right_icon = null
@@ -145,21 +145,40 @@ slot/14/right_type = 0
 slot/14/right_color = Color(1, 1, 1, 1)
 slot/14/right_icon = null
 slot/14/draw_stylebox = true
+slot/15/left_enabled = false
+slot/15/left_type = 0
+slot/15/left_color = Color(1, 1, 1, 1)
+slot/15/left_icon = null
+slot/15/right_enabled = true
+slot/15/right_type = 0
+slot/15/right_color = Color(1, 1, 1, 1)
+slot/15/right_icon = null
+slot/15/draw_stylebox = true
+slot/16/left_enabled = false
+slot/16/left_type = 0
+slot/16/left_color = Color(1, 1, 1, 1)
+slot/16/left_icon = null
+slot/16/right_enabled = false
+slot/16/right_type = 0
+slot/16/right_color = Color(1, 1, 1, 1)
+slot/16/right_icon = null
+slot/16/draw_stylebox = true
 script = ExtResource("1_7nebk")
 type_button = NodePath("NodeType")
 node_text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
 node_name_option = NodePath("NodeName")
 node_sprite_option = NodePath("NodeSprite")
-node_sound_option = NodePath("NodeSound")
+node_character_sound_option = NodePath("NodeSound")
 node_background_option = NodePath("NodeBackground")
 node_background_type_option = NodePath("NodeBackgroundType")
+node_background_sound_option = NodePath("NodeMusic")
 choice_button = NodePath("choices/Button")
 choice_label = NodePath("choices")
 text_label = NodePath("TextLabel")
 text_edit_label = NodePath("TextEditLabel")
 text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
 choice_template = ExtResource("2_cewil")
-choice_slot_offset = 13
+choice_slot_offset = 15
 node_popup = NodePath("PopupMenu")
 
 [node name="Type" type="Label" parent="." unique_id=553063356]
@@ -214,6 +233,14 @@ text = "background_type:"
 vertical_alignment = 1
 
 [node name="NodeBackgroundType" type="OptionButton" parent="." unique_id=2046633694]
+layout_mode = 2
+
+[node name="Music" type="Label" parent="." unique_id=1439493132]
+layout_mode = 2
+text = "background_sound:"
+vertical_alignment = 1
+
+[node name="NodeMusic" type="OptionButton" parent="." unique_id=1350370924]
 layout_mode = 2
 
 [node name="TextLabel" type="Label" parent="." unique_id=1140021939]
