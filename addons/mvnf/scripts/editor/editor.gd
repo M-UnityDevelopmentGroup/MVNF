@@ -249,6 +249,7 @@ func _open_story() -> void:
 func _update_enums(first_dict: Dictionary, first_enum: Dictionary, key: String, second_enum: Dictionary, second_key: String, third_enum: Dictionary) -> void:
 	first_enum.clear()
 	second_enum.clear()
+	third_enum.clear()
 	_list_resourses_to_enum(first_dict, first_enum)
 	for i in first_dict:
 		if first_dict.get(i).has(key):
