@@ -100,7 +100,6 @@ offset_bottom = -76.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
-text = "dddddddddddddddd"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dialog" unique_id=142887456]
 layout_mode = 1
@@ -161,7 +160,6 @@ offset_right = -12.5
 offset_bottom = -4.9999924
 grow_horizontal = 2
 grow_vertical = 2
-text = "Godot"
 horizontal_alignment = 1
 vertical_alignment = 1
 
