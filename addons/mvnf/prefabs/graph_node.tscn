@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cps2n2dhjxfhp" path="res://addons/mvnf/prefabs/choice_template.tscn" id="2_cewil"]
 [ext_resource type="PackedScene" uid="uid://begmetkjmwfxs" path="res://addons/mvnf/prefabs/node_position.tscn" id="3_cewil"]
 
-[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "node_sprite_option", "node_character_sound_option", "node_background_option", "node_background_type_option", "node_background_sound_option", "node_position", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
+[node name="GraphNode" type="GraphNode" unique_id=1725803912 node_paths=PackedStringArray("type_button", "node_text_edit", "node_name_option", "node_sprite_option", "node_character_sound_option", "node_background_option", "node_background_type_option", "node_background_sound_option", "node_position", "node_scale", "choice_button", "choice_label", "text_label", "text_edit_label", "text_edit", "node_popup")]
 custom_minimum_size = Vector2(300, 600)
 offset_right = 300.0
-offset_bottom = 646.0
+offset_bottom = 669.0
 mouse_filter = 1
 resizable = true
 ignore_invalid_connection_type = true
@@ -182,6 +182,24 @@ slot/18/right_type = 0
 slot/18/right_color = Color(1, 1, 1, 1)
 slot/18/right_icon = null
 slot/18/draw_stylebox = true
+slot/19/left_enabled = false
+slot/19/left_type = 0
+slot/19/left_color = Color(1, 1, 1, 1)
+slot/19/left_icon = null
+slot/19/right_enabled = false
+slot/19/right_type = 0
+slot/19/right_color = Color(1, 1, 1, 1)
+slot/19/right_icon = null
+slot/19/draw_stylebox = true
+slot/20/left_enabled = false
+slot/20/left_type = 0
+slot/20/left_color = Color(1, 1, 1, 1)
+slot/20/left_icon = null
+slot/20/right_enabled = false
+slot/20/right_type = 0
+slot/20/right_color = Color(1, 1, 1, 1)
+slot/20/right_icon = null
+slot/20/draw_stylebox = true
 script = ExtResource("1_7nebk")
 type_button = NodePath("NodeType")
 node_text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
@@ -192,13 +210,14 @@ node_background_option = NodePath("NodeBackground")
 node_background_type_option = NodePath("NodeBackgroundType")
 node_background_sound_option = NodePath("NodeMusic")
 node_position = NodePath("NodePosition")
+node_scale = NodePath("NodeScale")
 choice_button = NodePath("choices/Button")
 choice_label = NodePath("choices")
 text_label = NodePath("TextLabel")
 text_edit_label = NodePath("TextEditLabel")
 text_edit = NodePath("TextEditLabel/AutoSizeTextEdit")
 choice_template = ExtResource("2_cewil")
-choice_slot_offset = 17
+choice_slot_offset = 19
 node_popup = NodePath("PopupMenu")
 
 [node name="Type" type="Label" parent="." unique_id=553063356]
@@ -237,6 +256,14 @@ text = "position:"
 vertical_alignment = 1
 
 [node name="NodePosition" parent="." unique_id=2009398217 instance=ExtResource("3_cewil")]
+layout_mode = 2
+
+[node name="Scale" type="Label" parent="." unique_id=1193633333]
+layout_mode = 2
+text = "scale:"
+vertical_alignment = 1
+
+[node name="NodeScale" parent="." unique_id=711615476 instance=ExtResource("3_cewil")]
 layout_mode = 2
 
 [node name="Sound" type="Label" parent="." unique_id=91229242]

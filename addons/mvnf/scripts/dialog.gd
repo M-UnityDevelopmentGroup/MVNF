@@ -115,6 +115,8 @@ func handle_phrase() -> bool:
 		if phrase.has("transform"):
 			DialogImage.position.x = phrase.transform.get("position_x", 0)
 			DialogImage.position.y = phrase.transform.get("position_y", 0)
+			DialogImage.scale.x = phrase.transform.get("scale_x", 0)
+			DialogImage.scale.y = phrase.transform.get("scale_y", 0)
 		if StoryJSON.data.characters.get(phrase.name).sounds.has(phrase.sound):
 			foreground_stream.stream = load(StoryJSON.data.characters.get(phrase.name).sounds.get(phrase.sound))
 	phrase.get_or_add("background", "default")

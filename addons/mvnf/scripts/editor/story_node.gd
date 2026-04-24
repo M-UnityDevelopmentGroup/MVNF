@@ -10,6 +10,7 @@ extends GraphNode
 @export var node_background_type_option: OptionButton
 @export var node_background_sound_option: OptionButton
 @export var node_position: Transform
+@export var node_scale: Transform
 @export var choice_button: Button
 @export var choice_label: Label
 @export var text_label: Label
@@ -91,6 +92,10 @@ func _change_position(value: Dictionary[String, float]) -> void:
 	for i in value:
 		node_data.transform.set("position_"+i, value[i])
 
+func _change_scale(value: Dictionary[String, float]) -> void:
+	for i in value:
+		node_data.transform.set("scale_"+i, value[i])
+
 func _update_name() -> void:
 	if not current_editor.character_enum.has(node_data.name) and not current_editor.character_enum.is_empty():
 		node_data.name = current_editor.character_enum.keys()[0]
@@ -138,6 +143,9 @@ func set_node_properties(phrase: Dictionary, id: int, edit: GraphEdit, editor: S
 	node_data.get_or_add("transform", default_transform)
 	node_position.x.value = node_data.transform.position_x
 	node_position.y.value = node_data.transform.position_y
+	node_scale.x.value = node_data.transform.scale_x
+	node_scale.y.value = node_data.transform.scale_y
+	node_scale.transform_changed.connect(_change_scale)
 	node_position.transform_changed.connect(_change_position)
 	_update_name_enum()
 	_update_background_enum()
